@@ -3,405 +3,550 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Executive Geopolitical & Market Intelligence Briefing - Aug 18, 2026</title>
+    <title>Daily Executive Briefing & Intelligence Report - August 19, 2026</title>
     <style>
         :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --card-bg: #1e293b;
-            --accent-blue: #38bdf8;
-            --accent-green: #22c55e;
-            --accent-red: #ef4444;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
+            --primary: #1e3a8a;
+            --secondary: #2563eb;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --accent: #d97706;
+            --border: #cbd5e1;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-dark: #0f172a;
+            --green: #16a34a;
+            --red: #dc2626;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        header h1 { margin: 0 0 0.5rem 0; font-size: 2.2rem; font-weight: 700; letter-spacing: -0.5px; }
+        header p { margin: 0; color: #94a3b8; font-size: 1.05rem; }
+        
+        .ticker-bar {
+            background: #1e293b;
+            color: #f1f5f9;
+            padding: 0.75rem 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-bottom: 1px solid #334155;
+        }
+        .ticker-item span { margin-left: 0.3rem; }
+        .up { color: #4ade80; }
+        .down { color: #f87171; }
+
+        .container {
+            max-width: 1250px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .search-container {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .search-input {
+            width: 100%;
+            max-width: 350px;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-input:focus { border-color: var(--secondary); }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .tab-btn:hover { color: var(--primary); }
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: #0b0f19; color: var(--text-main); line-height: 1.6; padding: 20px; }
-        
-        .container { max-width: 1400px; margin: 0 auto; }
-        header { border-bottom: 2px solid var(--border-color); padding-bottom: 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: flex-end; }
-        h1 { font-size: 1.8rem; color: var(--text-main); font-weight: 700; letter-spacing: -0.5px; }
-        .subtitle { color: var(--accent-blue); font-size: 0.95rem; font-weight: 500; }
-        .timestamp { color: var(--text-muted); font-size: 0.85rem; }
-
-        /* Market Snapshot Banner */
-        .ticker-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 25px; }
-        .ticker-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; text-align: center; }
-        .ticker-label { color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; font-weight: 600; }
-        .ticker-value { font-size: 1.1rem; font-weight: 700; margin: 4px 0; }
-        .up { color: var(--accent-green); }
-        .down { color: var(--accent-red); }
-
-        /* Tabs Navigation */
-        .tabs { display: flex; gap: 10px; border-bottom: 1px solid var(--border-color); margin-bottom: 25px; }
-        .tab-btn { background: none; border: none; color: var(--text-muted); font-size: 1rem; font-weight: 600; padding: 12px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s ease; }
-        .tab-btn.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
-        .tab-btn:hover { color: var(--text-main); }
-
-        /* Content Sections */
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* Card Layout */
-        .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; transition: transform 0.2s ease; }
-        .card:hover { border-color: var(--accent-blue); }
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-        .card-title { font-size: 1.15rem; color: var(--text-main); font-weight: 600; }
-        .source-tag { font-size: 0.75rem; background: rgba(56, 189, 248, 0.1); color: var(--accent-blue); padding: 4px 8px; border-radius: 4px; text-decoration: none; font-weight: 500; white-space: nowrap; }
-        .source-tag:hover { background: rgba(56, 189, 248, 0.25); }
-        
-        .section-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--accent-blue); margin-top: 10px; }
-        p { font-size: 0.92rem; color: #cbd5e1; margin-bottom: 8px; }
-        ul { margin-left: 20px; font-size: 0.9rem; color: #cbd5e1; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 1.5rem;
+        }
 
-        /* Advisor Special Styling */
-        .advisor-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .talking-points { background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 10px; padding: 20px; }
-        .risk-watch { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 10px; padding: 20px; margin-top: 20px; }
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .card h3 {
+            margin: 0 0 0.75rem 0;
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+        .meta {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .meta a { color: var(--secondary); text-decoration: none; font-weight: 600; }
+        .meta a:hover { text-decoration: underline; }
 
-        footer { margin-top: 40px; text-align: center; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 20px; }
+        .card p { margin: 0 0 0.75rem 0; font-size: 0.95rem; }
+        .card strong { color: var(--text-dark); }
+        .interpretation {
+            background-color: #f8fafc;
+            padding: 0.85rem;
+            border-left: 3px solid var(--secondary);
+            border-radius: 0 6px 6px 0;
+            font-size: 0.9rem;
+            margin-top: auto;
+            color: #475569;
+        }
+
+        .snapshot-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .snapshot-table th, .snapshot-table td {
+            padding: 0.85rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+        .snapshot-table th { background: #f1f5f9; color: var(--text-dark); font-weight: 600; }
+
+        .talking-points {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .talking-points h3 { margin-top: 0; color: #1e40af; }
+        .talking-points ul { margin: 0; padding-left: 1.25rem; }
+        .talking-points li { margin-bottom: 0.75rem; }
+
+        .risk-watch {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        .risk-watch h3 { margin-top: 0; color: #92400e; }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <div>
-            <h1>Executive Geopolitical & Market Intelligence Briefing</h1>
-            <div class="subtitle">Dual Customization: Financial Advisor & Current Affairs Analysis</div>
-        </div>
-        <div class="timestamp">August 18, 2026 | 06:30 EST</div>
-    </header>
+<header>
+    <h1>Daily Executive Briefing & Intelligence Report</h1>
+    <p>Compiled for Geopolitical & Financial Markets Analysis | August 19, 2026</p>
+</header>
 
-    <div class="ticker-bar">
-        <div class="ticker-card">
-            <div class="ticker-label">S&P 500</div>
-            <div class="ticker-value down">7,745.00 (-0.52%)</div>
-        </div>
-        <div class="ticker-card">
-            <div class="ticker-label">Nasdaq 100</div>
-            <div class="ticker-value down">29,995.00 (-0.17%)</div>
-        </div>
-        <div class="ticker-card">
-            <div class="ticker-label">US 30Y Treasury</div>
-            <div class="ticker-value down">5.32% (+2 bps)</div>
-        </div>
-        <div class="ticker-card">
-            <div class="ticker-label">Brent Crude</div>
-            <div class="ticker-value up">$91.45 (+0.6%)</div>
-        </div>
-        <div class="ticker-card">
-            <div class="ticker-label">Spot Gold</div>
-            <div class="ticker-value">$4,050.00 (+0.1%)</div>
-        </div>
-        <div class="ticker-card">
-            <div class="ticker-label">Market Sentiment</div>
-            <div class="ticker-value down">Bearish / Risk-Off</div>
-        </div>
+<div class="ticker-bar">
+    <div class="ticker-item">S&P 500: <span>7,812.40</span> <span class="up">(+0.4%)</span></div>
+    <div class="ticker-item">Nasdaq: <span>26,320.15</span> <span class="up">(+0.1%)</span></div>
+    <div class="ticker-item">Dow Jones: <span>54,120.30</span> <span class="up">(+0.5%)</span></div>
+    <div class="ticker-item">Kospi: <span>3,015.10</span> <span class="down">(-5.1%)</span></div>
+    <div class="ticker-item">10-Yr US Treasury: <span>4.64%</span> <span class="down">(-7 bps)</span></div>
+    <div class="ticker-item">Brent Crude: <span>$92.15</span> <span class="up">(+1.2%)</span></div>
+    <div class="ticker-item">Spot Gold: <span>$4,082.50</span> <span class="up">(+0.3%)</span></div>
+</div>
+
+<div class="container">
+    
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search news and insights..." onkeyup="filterContent()">
     </div>
 
-    <div class="tabs">
+    <div class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab('advisor')">Aspiring Advisor Briefing</button>
-        <button class="tab-btn" onclick="switchTab('current-affairs')">Current Affairs (Top 10)</button>
-        <button class="tab-btn" onclick="switchTab('market-updates')">Market Updates (Top 10)</button>
+        <button class="tab-btn" onclick="switchTab('current')">Current Affairs (Top 15)</button>
+        <button class="tab-btn" onclick="switchTab('market')">Market Updates (Top 15)</button>
     </div>
 
     <div id="advisor" class="tab-content active">
-        <div class="advisor-grid">
-            <div>
-                <div class="card" style="margin-bottom:20px;">
-                    <h2 class="card-title" style="margin-bottom:10px; color:var(--accent-blue);">Market Situation Overview</h2>
-                    <p><strong>Major Index Movements:</strong> S&P 500 fell 0.52% to 7,745.00; Nasdaq 100 slipped 0.17% to 29,995.00 (reaching an intraday low of 29,760); Nikkei 225 dropped 1.1% to 68,460.56.</p>
-                    <p><strong>Key Commodities & Currencies:</strong> Brent Crude climbed 0.6% to $91.45/bbl due to expired US-Iran ceasefire terms; AUD/USD rose to $0.7111 as commodity currencies outperformed; Spot Gold held flat at $4,050/oz.</p>
-                    <p><strong>Overall Market Sentiment: Bearish / Risk-Off</strong>. Driven by the US 30-year yield surging to a 19-year high of 5.32% amid sovereign bond supply pressures and renewed energy inflation fears following the expiration of the US-Iran MOU.</p>
-                </div>
+        <div class="talking-points">
+            <h3>🎯 Advisor Perspective: Managing Rate Volatility & Liquidity Support</h3>
+            <p>Today's trading session demonstrated the market's high sensitivity to fixed income yields. The U.S. Treasury's announcement to double its long-bond buyback program pulled 10-year yields back down to 4.64%, providing quick relief for equities. While long-term debt costs remain high, strong consumer retail earnings (Target, Estée Lauder) validate underlying economic health. Keep clients focused on earnings durability over short-term rate noise.</p>
+        </div>
 
-                <div class="card">
-                    <h2 class="card-title" style="margin-bottom:10px;">Advisor Strategy & Portfolio Guidance</h2>
-                    <div class="section-label">Key Portfolio Takeaways</div>
-                    <ul>
-                        <li><strong>Fixed Income Duration Risk:</strong> Remind clients that cash yields remain compelling, but long-duration bond holdings face continued valuation drag as the 30-year yield breaks above 5.30%.</li>
-                        <li><strong>Energy Sector Allocation:</strong> Rising geopolitical risk surcharges make energy equities and commodities effective tactical hedges against geopolitical supply shocks.</li>
-                        <li><strong>Mega-Cap Tech Debt CapEx:</strong> Large-scale corporate debt issuance (e.g., Alphabet's A$5B bond sale) shows tech giants are diversifying capital funding to support massive generative AI CapEx.</li>
-                    </ul>
-                </div>
+        <h3>📈 Daily Market & Economic Snapshot</h3>
+        <table class="snapshot-table">
+            <thead>
+                <tr>
+                    <th>Asset / Benchmark</th>
+                    <th>Current Level / Shift</th>
+                    <th>Primary Market Driver</th>
+                    <th>Portfolio & Client Impact</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>S&P 500</strong></td>
+                    <td>7,812.40 (+0.4%)</td>
+                    <td>U.S. Treasury long-bond buybacks & retail earnings beat</td>
+                    <td>Snaps 3-day decline; supports risk asset allocations.</td>
+                </tr>
+                <tr>
+                    <td><strong>Kospi (S. Korea)</strong></td>
+                    <td>3,015.10 (-5.1%)</td>
+                    <td>Chip selloff (SK Hynix -7%) on global yield concerns</td>
+                    <td>High-beta tech hardware exposed to high debt costs.</td>
+                </tr>
+                <tr>
+                    <td><strong>10-Yr US Treasury</strong></td>
+                    <td>4.64% (-7 bps)</td>
+                    <td>Treasury doubles long-dated nominal bond buybacks</td>
+                    <td>Pauses yield surge; relieves fixed income valuations.</td>
+                </tr>
+                <tr>
+                    <td><strong>Brent Crude Oil</strong></td>
+                    <td>$92.15 (+1.2%)</td>
+                    <td>UAE-Iran trade freeze & Mideast truce expiration</td>
+                    <td>Sticky headline inflation; keeps energy hedges relevant.</td>
+                </tr>
+                <tr>
+                    <td><strong>Spot Gold</strong></td>
+                    <td>$4,082.50 (+0.3%)</td>
+                    <td>Central bank reserve buying & Mideast transit risks</td>
+                    <td>Solid structural floor; effective inflation hedge.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="talking-points">
+            <h3>🗣️ In-Depth Client Talking Points</h3>
+            <ul>
+                <li><strong>"Why did stocks rally today despite elevated inflation?"</strong> - Treasury bond buybacks lowered long-term yields to 4.64%, lifting stock valuations while retail earnings proved consumer resilience.</li>
+                <li><strong>"Should I panic over Asian tech stocks dropping 5%?"</strong> - The pullbacks in semiconductor producers stem from high sensitivity to borrowing costs, not a collapse in long-term AI hardware demand.</li>
+                <li><strong>"How does the Middle East situation affect my portfolio?"</strong> - Energy prices remain volatile around $92/bbl, which is why we maintain broad commodity exposure and short-duration bond buffers.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="current" class="tab-content">
+        <div class="grid">
+            <div class="card">
+                <h3>1. UAE Suspends All Trade with Iran Following Persian Gulf Ballistic Missile Incidents</h3>
+                <div class="meta">Source: <a href="https://apnews.com/article/iran-united-arab-emirates-trade-august-19-2026-47c95fe382c49289ab0419310b6d8057" target="_blank">Associated Press</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> The UAE halted all commercial and financial transactions with Iran after two ballistic missiles splashed down in the Persian Gulf near critical maritime shipping corridors.</p>
+                <p><strong>Why it Matters:</strong> Severely damages Iran's primary re-export gateway for sanctions evasion, increasing regional economic isolation and maritime security risks.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> UAE's full trade freeze closes a key commercial lifeline that previously softened U.S. sanctions. This escalation signals heightened gulf volatility and prolonged transit risk through the Strait of Hormuz.</div>
             </div>
 
-            <div>
-                <div class="talking-points">
-                    <h3 style="color:var(--accent-green); margin-bottom:10px;">💬 Client Talking Points</h3>
-                    <p><strong>1. "Why are tech stocks pulling back when AI growth is strong?"</strong></p>
-                    <p><em>Angle:</em> Explain that surging long-term interest rates (30Y Treasury yield at 5.32%) compress valuation multiples for future growth earnings, creating a discount-rate drag even on healthy tech fundamentals.</p>
-                    <br>
-                    <p><strong>2. "Should we be worried about oil returning to $90+?"</strong></p>
-                    <p><em>Angle:</em> Framing this as a geopolitical risk premium rather than a structural demand shock helps clients see why holding diversified commodity exposure shields portfolio purchasing power.</p>
-                </div>
+            <div class="card">
+                <h3>2. Israel Strikes in Gaza Cast Doubts on Ceasefire Progress Following U.S. Negotiations</h3>
+                <div class="meta">Source: <a href="https://apnews.com/article/gaza-israel-war-kushner-talks-trump-netanyahu-8c8741e238c72bcbc45e1647afbde206" target="_blank">Associated Press</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Israeli strikes killed at least 10 people in Gaza and troops detained a Hamas police official just two days after U.S. negotiators requested an offensive drawdown.</p>
+                <p><strong>Why it Matters:</strong> Threatens the fragile U.S.-brokered ceasefire framework and delays discussions on troop withdrawals and humanitarian relief distribution.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Persistent tactical military actions despite high-level diplomatic interventions underscore severe political friction over disarmament sequencing, sustaining Mideast risk premiums.</div>
+            </div>
 
-                <div class="risk-watch">
-                    <h3 style="color:var(--accent-red); margin-bottom:10px;">⚠️ What I Might Be Missing</h3>
-                    <ul>
-                        <li><a href="https://www.theedgesingapore.com/news/hong-kong/hedge-fund-tax-break-grips-hong-kong-banks-fear-exodus" target="_blank" style="color:var(--accent-blue);">Hong Kong Prop Trading Desk Discontent</a>: Tax breaks target asset managers but exclude prop trading, raising bank talent turnover risks.</li>
-                        <li><a href="https://www.straitstimes.com/world/while-you-were-sleeping-5-stories-you-might-have-missed-aug-18-2026" target="_blank" style="color:var(--accent-blue);">Yangon Infrastructure Strain</a>: Cholera outbreak in Myanmar highlights broader supply chain and refugee pressures in SE Asia.</li>
-                        <li><a href="https://news.metal.com/en/newscontent/104063949-geopolitical-risks-heat-up-again-overnight-copper-prices-pull-back-slightly-smm-copper-morning-comment" target="_blank" style="color:var(--accent-blue);">China Copper Inventory Buildup</a>: Copper stockpiles rose 15,900 mt as downstream buyers resist higher prices, signaling mixed industrial demand signals.</li>
-                    </ul>
-                </div>
+            <div class="card">
+                <h3>3. Iran and UAE Diplomatic Ties Sour as Tehran Officials Visit Iraq</h3>
+                <div class="meta">Source: <a href="https://apnews.com/article/iran-usa-hormuz-persian-gulf-war-4ad1f8ffc1603cbb5151ab8eebc1ec6a" target="_blank">Associated Press</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Iranian Foreign Ministry denied missile launches while French diplomats were expelled in reciprocal actions during an Iranian leadership visit to Baghdad.</p>
+                <p><strong>Why it Matters:</strong> Deepens diplomatic fractures across the Middle East and Europe, dampening hopes for near-term multilateral security negotiations.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Reciprocal diplomat expulsions and proxy militia posturing indicate regional power centers are digging in for an extended standoff, complicating global transit safety efforts.</div>
+            </div>
+
+            <div class="card">
+                <h3>4. Canada Condemns Israeli Ground Invasion in Lebanon and Announces New Aid</h3>
+                <div class="meta">Source: <a href="https://apnews.com/article/lebanon-israel-syria-canada-hezbollah-war-refugees-randeep-sarai-8787e292cb3948ad5868a142ee63c93f" target="_blank">Associated Press</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Canadian Minister Randeep Sarai criticized Israel's ongoing ground presence in southern Lebanon while announcing new humanitarian relief for displaced communities.</p>
+                <p><strong>Why it Matters:</strong> Highlights growing Western diplomatic opposition to military incursions and civilian displacement across the Levant.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Public criticism from key Western allies signals increasing international pressure regarding extended military operations, impacting Western defense export policy consensus.</div>
+            </div>
+
+            <div class="card">
+                <h3>5. Reuters/Ipsos Poll Finds Majority Believes Trump Has Business Conflicts of Interest</h3>
+                <div class="meta">Source: <a href="https://www.channelnewsasia.com/business/most-americans-believe-trump-has-inappropriately-profited-returning-power-reutersipsos-poll-finds-6328516" target="_blank">Channel NewsAsia / Reuters</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> A nationwide poll showed 69% of Americans believe private commercial interests—including cryptocurrency ventures—influence White House policy decisions.</p>
+                <p><strong>Why it Matters:</strong> Heightens political polarization and governance scrutiny ahead of the November U.S. Congressional midterm elections.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Domestic policy scrutiny ahead of midterms will likely increase regulatory volatility, particularly for digital assets and fintech sectors tied to political discourse.</div>
+            </div>
+
+            <div class="card">
+                <h3>6. U.S. and Canada Agree to Temporarily Delay Tariff Escalations</h3>
+                <div class="meta">Source: <a href="https://apnews.com/live/trump-news-primaries-updates-08-19-2026" target="_blank">Associated Press</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> U.S. and Canadian negotiators agreed to postpone impending cross-border industrial trade tariffs to facilitate bilateral commercial discussions.</p>
+                <p><strong>Why it Matters:</strong> Staves off immediate input cost pressures for North American manufacturing, industrial, and automotive supply chains.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Tariff deferrals provide tactical relief for cross-border equities, though persistent trade protectionist sentiment keeps long-term corporate supply chains cautious.</div>
+            </div>
+
+            <div class="card">
+                <h3>7. China Showcases Factory Automation and Humanoid Robotics at World Conference</h3>
+                <div class="meta">Source: <a href="https://apnews.com/article/china-robot-conference-951ebd3cddaccf5afcedc68174ba626a" target="_blank">Associated Press</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Chinese tech firms demonstrated humanoid robots and automated factory systems aimed at real-world industrial deployment in Beijing.</p>
+                <p><strong>Why it Matters:</strong> Accelerates global competition in physical AI, advanced manufacturing automation, and supply chain productivity.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Heavy capital expenditure in robotics aims to offset domestic demographic shifts while reinforcing China's cost advantage in industrial manufacturing exports.</div>
+            </div>
+
+            <div class="card">
+                <h3>8. Greater Manchester Mayor Andy Burnham Vows Power Transfer from UK Treasury</h3>
+                <div class="meta">Source: <a href="https://www.businesstimes.com.sg/international/burnham-vows-huge-transfer-power-treasury-no-10-north" target="_blank">The Business Times</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> UK political leadership pledged substantial economic decentralization to boost infrastructure investment across Northern England.</p>
+                <p><strong>Why it Matters:</strong> Signals potential reallocations in public capital expenditure and municipal development strategies across British metropolitan hubs.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Devolution across UK regions creates localized municipal investment opportunities, shifting long-term infrastructure funding away from centralized Whitehall channels.</div>
+            </div>
+
+            <div class="card">
+                <h3>9. Tourist Helicopter Crash in Kenya Kills Seven Near Mount Ololokwe</h3>
+                <div class="meta">Source: <a href="https://www.straitstimes.com/world/tourist-helicopter-crashes-in-kenya-police-say-seven-killed" target="_blank">The Straits Times / Reuters</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> A tour helicopter carrying six foreign tourists crashed in Samburu County, initiating a national aviation safety investigation.</p>
+                <p><strong>Why it Matters:</strong> Prompts regulatory safety reviews for charter aviation operators across East African eco-tourism hubs.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> While localized, transport incidents in high-value tourism sectors briefly impact luxury travel operator sentiment and drive stricter local regulatory compliance checks.</div>
+            </div>
+
+            <div class="card">
+                <h3>10. Singapore Foreign Work Pass Track and Tax Incentives Boost Asset Management</h3>
+                <div class="meta">Source: <a href="https://www.straitstimes.com/newsletter/evening-update-today-s-headlines-from-the-straits-times-on-aug-19-2026" target="_blank">The Straits Times</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Singapore launched enhanced foreign talent visa frameworks and expanded tax exemptions for institutional fund managers.</p>
+                <p><strong>Why it Matters:</strong> Solidifies Singapore's positioning as Asia's primary private wealth, fund management, and financial capital hub.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Proactive regulatory tailoring and tax clarity reinforce capital inflows into Singapore platforms, attracting global family offices relocating from more restrictive jurisdictions.</div>
+            </div>
+
+            <div class="card">
+                <h3>11. White House "Transshipment Scam" Report Signals Stricter Global Trade Rules</h3>
+                <div class="meta">Source: <a href="https://www.straitstimes.com/newsletter/evening-update-today-s-headlines-from-the-straits-times-on-aug-19-2026" target="_blank">The Straits Times</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> U.S. policy reports targeting third-country origin rules indicate impending enforcement against trade re-routing and tariff evasion.</p>
+                <p><strong>Why it Matters:</strong> Threatens Southeast Asian manufacturing intermediaries that process intermediate goods between Asian supply chains and Western consumers.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Aggressive enforcement of rules-of-origin will force multinational manufacturers to audit supply chains, raising compliance overhead and reshaping ASEAN industrial exports.</div>
+            </div>
+
+            <div class="card">
+                <h3>12. Malaysia RTS Link Enters Final Testing Ahead of Transit Launch Announcement</h3>
+                <div class="meta">Source: <a href="https://www.straitstimes.com/newsletter/evening-update-today-s-headlines-from-the-straits-times-on-aug-19-2026" target="_blank">The Straits Times</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> The Johor Bahru-Singapore Rapid Transit System began comprehensive operational systems testing prior to final fare structure announcements.</p>
+                <p><strong>Why it Matters:</strong> Dramatically improves cross-border workforce mobility and economic integration between Singapore and Southern Malaysia.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Seamless transit infrastructure catalyzes real estate development, retail growth, and logistical integration within the Johor-Singapore Special Economic Zone.</div>
+            </div>
+
+            <div class="card">
+                <h3>13. ICC Denounces U.S. Administrative Sanctions as Threat to Rule of Law</h3>
+                <div class="meta">Source: <a href="https://apnews.com/live/trump-news-primaries-updates-08-19-2026" target="_blank">Associated Press</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> The ICC issued a statement stating U.S. executive sanctions undermine international judicial independence and global legal conventions.</p>
+                <p><strong>Why it Matters:</strong> Highlights structural friction between multilateral judicial bodies and major power sovereign executive actions.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Sanction disputes involving global legal bodies create geopolitical governance uncertainty, complicating international treaty enforcement and cross-border judicial cooperation.</div>
+            </div>
+
+            <div class="card">
+                <h3>14. Severe Torrential Downpours Cause Fatal Flooding and Transit Disruption in Indiana</h3>
+                <div class="meta">Source: <a href="https://apnews.com/article/flooding-indiana-severe-weather-aa3624a3ff1a0d241f62ec980a23e856" target="_blank">Associated Press</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Sustained downpours resulted in seven fatalities and widespread infrastructure damage across the U.S. Midwest, severing transportation corridors.</p>
+                <p><strong>Why it Matters:</strong> Weighs on agricultural transport logistics, local property-casualty insurance claims, and regional supply chain throughput.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Severe weather disruptions emphasize rising operational risks for Midwest agricultural supply chains, reinforcing long-term commercial insurance price inflation.</div>
+            </div>
+
+            <div class="card">
+                <h3>15. Fastest-Known Star S5-HVS1 Tracked Zooming Under Galactic Black Hole Influence</h3>
+                <div class="meta">Source: <a href="https://www.channelnewsasia.com/business/fastest-known-star-zooms-under-milky-way-black-holes-influence-6329096" target="_blank">Channel NewsAsia / Reuters</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Astrophysicists published detailed trajectory measurements tracking hypervelocity star movements influenced by the Milky Way's central supermassive black hole.</p>
+                <p><strong>Why it Matters:</strong> Advances fundamental gravitational research and satellite trajectory mapping technologies.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Breakthroughs in high-velocity observational astronomy drive commercial space tracking innovation and long-term public-private technological research spending.</div>
             </div>
         </div>
     </div>
 
-    <div id="current-affairs" class="tab-content">
+    <div id="market" class="tab-content">
         <div class="grid">
             <div class="card">
-                <div class="card-header">
-                    <div class="card-title">1. US-Iran Ceasefire MoU Expires as Trump Rules Out Extension</div>
-                    <a href="https://www.thehindu.com/news/international/iran-us-west-asia-war-strait-of-hormuz-news-donald-trump-live-updates-on-august-18-2026/article71358724.ece" class="source-tag" target="_blank">The Hindu / AP | Aug 18, 07:00 IST</a>
-                </div>
-                <p><strong>Summary:</strong> The 60-day interim memorandum of understanding between the US and Iran expired without a permanent peace deal. President Trump ruled out an extension, while Iran announced a shift to a "fully offensive" military posture.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Sparks immediate risk of renewed military confrontations around the Strait of Hormuz, driving Brent crude above $91/barrel and raising global supply chain costs.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Highlights the fragility of temporary diplomatic agreements that fail to address core strategic alignment. Financial markets must now embed a permanent geopolitical volatility risk premium into global energy pricing.</p>
+                <h3>1. U.S. Treasury Triples Long-Bond Buyback Plan, Pulling Yields Off Multi-Year Highs</h3>
+                <div class="meta">Source: <a href="https://apnews.com/article/stocks-futures-bonds-oil-inflation-trump-ai-9e355be634e4a21059fc1d1f20a1239e" target="_blank">Associated Press</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> The U.S. Treasury Department announced it will expand planned purchases of long-term Treasuries from Sept 9 to Nov 4, pulling 10-year yields down to 4.64%.</p>
+                <p><strong>Why it Matters:</strong> Direct sovereign liquidity support reduces immediate borrowing cost pressures across global fixed income and corporate credit markets.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Treasury long-end buybacks provide structural support for government debt markets, relieving rate-sensitive equities and capping runaway long-term borrowing costs.</div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <div class="card-title">2. Trump Approval Rating Drops to 33%, Lowest of Presidency</div>
-                    <a href="https://www.straitstimes.com/world/united-states/trump-approval-falls-to-33-lowest-of-his-presidency-reuters-ipsos-poll-finds?ref=latest" class="source-tag" target="_blank">Reuters / Straits Times | Aug 18, 05:54 SGT</a>
-                </div>
-                <p><strong>Summary:</strong> A Reuters/Ipsos poll revealed President Donald Trump's approval rating fell to 33%, driven by widespread public concern over prolonged military conflict in the Middle East and rising domestic petrol prices.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Declining public support ahead of November midterm elections increases legislative unpredictability in Washington, potentially prompting sudden White House policy pivots.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Erosion of executive political capital limits the administration's ability to pass major domestic legislation or secure bipartisan funding for external security commitments.</p>
+                <h3>2. U.S. Stocks Snap Three-Day Slide as Lower Yields and Target Earnings Support Market</h3>
+                <div class="meta">Source: <a href="https://apnews.com/article/stocks-futures-bonds-oil-inflation-trump-ai-9e355be634e4a21059fc1d1f20a1239e" target="_blank">Associated Press</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> The S&P 500 rose 0.4% and the Dow added 255 points (+0.5%), buoyed by declining bond yields and strong quarterly earnings from Target and Estée Lauder.</p>
+                <p><strong>Why it Matters:</strong> Validates underlying corporate balance sheet health and demonstrates quick market rebound potential when fixed income stress cools.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Investors remain eager to deploy capital into quality equities upon yield stabilization, maintaining the broader soft-landing macroeconomic narrative.</div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <div class="card-title">3. US Envoy Kushner and Netanyahu Hold Marathon Gaza Talks</div>
-                    <a href="https://baytobaynews.com/stories/ap-news-summary-at-1247-am-edt,339850" class="source-tag" target="_blank">Associated Press | Aug 18, 00:47 EDT</a>
-                </div>
-                <p><strong>Summary:</strong> US negotiator Jared Kushner met Israeli PM Netanyahu in Jerusalem, agreeing that an American general would verify Hamas disarmament, though Israel declined to commit to a Gaza troop withdrawal timeline.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Without a defined military withdrawal timeline, full diplomatic stabilization across the Levant remains stalled, prolonging regional humanitarian and security friction.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Preconditions linking reconstruction exclusively to complete disarmament set a high bar for progress, leaving the region susceptible to localized escalations.</p>
+                <h3>3. Asian Markets Experience Broad Selloff Led by Tech and Semiconductor Giants</h3>
+                <div class="meta">Source: <a href="https://www.channelnewsasia.com/asia/asian-stocks-tech-leads-losses-wall-st-6327646" target="_blank">Channel NewsAsia / AP</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> South Korea's Kospi plunged over 5% with SK Hynix and Samsung down 7%, while Japan's Nikkei fell 2% amid heightened yield sensitivity.</p>
+                <p><strong>Why it Matters:</strong> Illustrates high vulnerability in capital-intensive semiconductor manufacturers to elevated global discount rates and borrowing costs.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> High-beta chip producers are facing short-term margin re-valuations, reminding investors that AI growth stories must be balanced against high debt service costs.</div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <div class="card-title">4. Saudi Arabia, Turkey, and Pakistan Sign Tripartite Mutual Defense Pact</div>
-                    <a href="https://www.justsecurity.org/154305/early-edition-august-17-2026/" class="source-tag" target="_blank">Just Security | Aug 17, 2026</a>
-                </div>
-                <p><strong>Summary:</strong> Saudi Arabia, Turkey, and Pakistan formally signed a mutual defense agreement to coordinate regional military cooperation and security independent of Western alliance structures.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Marks a structural shift in Persian Gulf and Middle Eastern defense architecture as regional powers diversify security relationships away from sole reliance on the US.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Accelerates multipolar defense alignments across the Middle East and South Asia, opening new procurement opportunities for non-Western defense industrial sectors.</p>
+                <h3>4. 30-Year U.S. Treasury Yield Touches Highest Level Since 2007 Before Buyback Relief</h3>
+                <div class="meta">Source: <a href="https://www.channelnewsasia.com/asia/asian-stocks-tech-leads-losses-wall-st-6327646" target="_blank">Channel NewsAsia / Reuters</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Long-dated U.S. bond yields briefly climbed to pre-2008 financial crisis levels due to heavy corporate bond issuance and sticky inflation concerns.</p>
+                <p><strong>Why it Matters:</strong> High benchmark long yields raise mortgage rates, increase corporate debt refinancing costs, and tighten broad financial conditions.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Fiscal deficit supply pressures and persistent inflation continue to steepen the yield curve, favoring short-duration debt allocations.</div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <div class="card-title">5. US Issues AI Coalition Ultimatum Warning Nations to Choose Alignment</div>
-                    <a href="https://www.justsecurity.org/154305/early-edition-august-17-2026/" class="source-tag" target="_blank">Reuters / Just Security | Aug 17, 2026</a>
-                </div>
-                <p><strong>Summary:</strong> The US administration is preparing guidelines instructing partner nations to choose between a US-led AI coalition or Beijing's framework, warning that dual participation will revoke US tech sharing.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Drives the technological balkanization of artificial intelligence architectures and semiconductor supply chains globally.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Middle-power economies face diplomatic pressure to align their digital infrastructure strictly with either Washington or Beijing, raising tech compliance burdens.</p>
+                <h3>5. Brent Crude Surges Back Above $92/bbl as Hormuz Truce Extension Scrapped</h3>
+                <div class="meta">Source: <a href="https://www.channelnewsasia.com/asia/asian-stocks-tech-leads-losses-wall-st-6327646" target="_blank">Channel NewsAsia / Reuters</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Crude prices gained over 1% with Brent reaching $92.15/bbl after official confirmation that the 60-day Persian Gulf maritime truce will not be extended.</p>
+                <p><strong>Why it Matters:</strong> Restokes headline inflation concerns and elevates marine transport freight surcharges across international trade corridors.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Energy volatility remains the primary inflation wildcard for global central banks, threatening to delay anticipated monetary policy easing.</div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <div class="card-title">6. Heavy Drone and Missile Strikes Escalated Between Russia and Ukraine</div>
-                    <a href="https://www.bbc.com/news" class="source-tag" target="_blank">Reuters / BBC News | Aug 18, 2026</a>
-                </div>
-                <p><strong>Summary:</strong> Russian strikes targeted Ukrainian industrial plants while Ukrainian drone attacks struck the Moscow region, setting fire to a major e-commerce warehouse, as European powers prepare independent peace talks.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Persistent targeting of industrial and logistics hubs prolongs supply bottlenecks in European raw materials and commercial freight transport.</p>
-                <div class="section-label">Interpretations</div>
-                <p>The establishment of a UK-France-Germany negotiation format underscores European efforts to establish independent diplomatic frameworks alongside Washington's foreign stance.</p>
+                <h3>6. Target and Estée Lauder Beat Earnings Estimates, Reaffirming Consumer Resilience</h3>
+                <div class="meta">Source: <a href="https://apnews.com/article/stocks-futures-bonds-oil-inflation-trump-ai-9e355be634e4a21059fc1d1f20a1239e" target="_blank">Associated Press</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Strong quarterly retail earnings reports demonstrated resilient middle-market consumer spending and effective inventory management.</p>
+                <p><strong>Why it Matters:</strong> Confirms that consumer balance sheets are continuing to hold up despite elevated borrowing costs and general headline inflation.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Solid corporate earnings beats provide fundamental equity support, helping insulate broad stock indexes from macroeconomic policy shocks.</div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <div class="card-title">7. Severe Cholera Outbreak Declared in Yangon with 500 Hospitalized</div>
-                    <a href="https://www.straitstimes.com/world/while-you-were-sleeping-5-stories-you-might-have-missed-aug-18-2026" class="source-tag" target="_blank">Reuters / Straits Times | Aug 18, 05:54 SGT</a>
-                </div>
-                <p><strong>Summary:</strong> Over 500 people were hospitalized in Myanmar's commercial hub Yangon with 150 confirmed cholera cases as municipal infrastructure deteriorates after five years of internal conflict.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Poses regional public health and border security challenges across Southeast Asia while exacerbating humanitarian relief needs.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Demonstrates how civil unrest degrades public utilities, creating secondary health crises that require regional diplomatic intervention.</p>
+                <h3>7. Kioxia Shares Drop 10% in Tokyo Amid Broader Tech Capital Expenditure Concerns</h3>
+                <div class="meta">Source: <a href="https://www.channelnewsasia.com/asia/asian-stocks-tech-leads-losses-wall-st-6327646" target="_blank">Channel NewsAsia</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Japanese memory chipmaker Kioxia led technology sector losses in Tokyo as investors re-assessed high-cost semiconductor expansion plans.</p>
+                <p><strong>Why it Matters:</strong> Highlights institutional investor scrutiny over heavy capital expenditure budgets in memory chip and hardware sectors.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Tech hardware manufacturers face margin compression concerns, requiring disciplined capital allocation to maintain investor confidence.</div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <div class="card-title">8. Tupac Shakur Murder Trial Begins in Las Vegas Court</div>
-                    <a href="https://www.straitstimes.com/world/while-you-were-sleeping-5-stories-you-might-have-missed-aug-18-2026" class="source-tag" target="_blank">AP / Straits Times | Aug 18, 05:54 SGT</a>
-                </div>
-                <p><strong>Summary:</strong> Prosecutors presented opening arguments against Duane "Keffe D" Davis in Las Vegas, charging him with orchestrating the 1996 drive-by shooting of rap icon Tupac Shakur.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Marks the legal opening of a famous cold case in American pop culture history.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Highlights how public memoirs and unverified statements can reignite cold criminal investigations decades after the event.</p>
+                <h3>8. Spot Gold Holds Steady Near $4,080/oz Driven by Central Bank Reserve Accumulation</h3>
+                <div class="meta">Source: <a href="https://www.cnbc.com/markets/" target="_blank">Reuters / CNBC</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Gold traded firmly around $4,082/oz, backed by continuous sovereign central bank purchasing and safe-haven demand amidst Mideast maritime risks.</p>
+                <p><strong>Why it Matters:</strong> Confirms structural portfolio demand for defensive, non-fiat store-of-value assets during persistent geopolitical fragmentation.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Gold remains an essential multi-asset portfolio stabilizer, offering steady downside protection against sovereign yield spikes and currency weakness.</div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <div class="card-title">9. Two Dead in High School Shooting in Southern Philippines</div>
-                    <a href="https://www.straitstimes.com/asia/two-killed-in-high-school-shooting-in-southern-philippines-officials-say" class="source-tag" target="_blank">Reuters / Straits Times | Aug 18, 10:41 SGT</a>
-                </div>
-                <p><strong>Summary:</strong> A gunman killed a student before dying in a high school shooting in Zamboanga, southern Philippines, prompting President Marcos Jr. to order an immediate nationwide safety review.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Second school shooting incident in the Philippines within two months, increasing pressure for stricter domestic firearm regulations.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Heightened public concern is expected to accelerate legislative proposals restricting civilian firearm ownership across Southeast Asia.</p>
+                <h3>9. Singapore Certificate of Entitlement (COE) Premiums Advance Across Categories</h3>
+                <div class="meta">Source: <a href="https://www.straitstimes.com/newsletter/evening-update-today-s-headlines-from-the-straits-times-on-aug-19-2026" target="_blank">The Straits Times</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Vehicle licensing premiums rose across commercial and passenger categories in Singapore's latest bi-monthly bidding exercise.</p>
+                <p><strong>Why it Matters:</strong> Points to strong domestic liquidity, active commercial fleet expansion, and elevated local transport cost overheads.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Rising COE costs reflect strong domestic purchasing power and business activity in Singapore, keeping local core inflation modestly sticky.</div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <div class="card-title">10. FIFA COO Departs Following Internal Dispute Over Commercial Stake Sale</div>
-                    <a href="https://www.straitstimes.com/world/while-you-were-sleeping-5-stories-you-might-have-missed-aug-18-2026" class="source-tag" target="_blank">Reuters / Straits Times | Aug 18, 05:54 SGT</a>
-                </div>
-                <p><strong>Summary:</strong> FIFA confirmed COO Kevin Lamour left the sports body after opposing President Infantino's proposal to sell private equity stakes in tournament commercial rights.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Exposes governance friction as global sporting organizations evaluate private capital investments in commercial properties.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Institutional resistance to fast-track monetization highlights ongoing conflicts between institutional sport stewardship and private equity capital expansion.</p>
+                <h3>10. Singapore High Court Enforces $7 Million Order in Broken Share Buyback Case</h3>
+                <div class="meta">Source: <a href="https://www.straitstimes.com/newsletter/evening-update-today-s-headlines-from-the-straits-times-on-aug-19-2026" target="_blank">The Straits Times</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Judicial ruling ordered an investor to pay $7 million following a defaulted $8 million private share repurchase commitment.</p>
+                <p><strong>Why it Matters:</strong> Reinforces Singapore's reputation for uncompromising legal enforcement of private equity and corporate agreements.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Strict contract enforcement mechanisms uphold institutional investor confidence and safeguard private capital structuring in Singapore.</div>
+            </div>
+
+            <div class="card">
+                <h3>11. Bridal Shop Shutdown Triggers Consumer Claims Over $270k in Deposits</h3>
+                <div class="meta">Source: <a href="https://www.straitstimes.com/newsletter/evening-update-today-s-headlines-from-the-straits-times-on-aug-19-2026" target="_blank">The Straits Times</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Consumer watchdogs received dozens of fraud complaints following the sudden shuttering of a long-standing local retail service operator.</p>
+                <p><strong>Why it Matters:</strong> Underlines working capital strains facing small-to-medium retail service businesses operating under high lease and labor overheads.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Micro-enterprise defaults highlight localized cash flow squeezes in high-overhead service niches, contrasting with large corporate earnings strength.</div>
+            </div>
+
+            <div class="card">
+                <h3>12. Thai Baht Rally Moderates as Bank of Thailand Signals Dovish Stance</h3>
+                <div class="meta">Source: <a href="https://www.businesstimes.com.sg" target="_blank">The Business Times</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> The Thai baht's regional currency rally slowed after central bank officials hinted at accommodative monetary policy to protect domestic growth.</p>
+                <p><strong>Why it Matters:</strong> Highlights emerging Asian central bank divergence as regional policymakers prioritize domestic growth over matching Federal Reserve rates.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Dovish policy pivots in Southeast Asia aim to cushion domestic economic recovery, even if it leads to temporary currency volatility against the USD.</div>
+            </div>
+
+            <div class="card">
+                <h3>13. COSCO Shipping Expands Capital Investments in Malaysia, Vietnam, and Indonesia</h3>
+                <div class="meta">Source: <a href="https://www.businesstimes.com.sg" target="_blank">The Business Times</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Global shipping giant COSCO announced new infrastructure investments in ASEAN maritime logistics hubs to capture re-routed manufacturing trade.</p>
+                <p><strong>Why it Matters:</strong> Accelerates regional logistics infrastructure build-outs across major South-East Asian manufacturing export centers.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Major maritime carriers are aggressively positioning infrastructure in Southeast Asia, confirming structural long-term manufacturing shifts into ASEAN.</div>
+            </div>
+
+            <div class="card">
+                <h3>14. Vietnam IPO Pipeline Faces Investor Hesitation Amid Tightening Global Liquidity</h3>
+                <div class="meta">Source: <a href="https://www.businesstimes.com.sg" target="_blank">The Business Times</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> Initial public equity offerings in Vietnam encountered subdued institutional subscription despite strong underlying national GDP expansion.</p>
+                <p><strong>Why it Matters:</strong> Demonstrates selective foreign capital deployment in emerging primary markets amidst elevated global interest rate benchmarks.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Global institutional capital is demanding strict valuation discipline in frontier markets, favoring cash-generative secondary equities over primary listings.</div>
+            </div>
+
+            <div class="card">
+                <h3>15. U.S. Dollar Index (DXY) Moderates to 103.80 Following Yield Pullback</h3>
+                <div class="meta">Source: <a href="https://www.cnbc.com/markets/" target="_blank">BNN Bloomberg / CNBC</a> (Aug 19, 2026)</div>
+                <p><strong>Summary:</strong> The U.S. dollar index pulled back from multi-week highs as U.S. Treasury buyback announcements lowered long-term yields.</p>
+                <p><strong>Why it Matters:</strong> Eases foreign exchange pressures on imported commodities and foreign-currency debt servicing costs worldwide.</p>
+                <div class="interpretation"><strong>Analyst Interpretation:</strong> Temporary dollar softening provides welcome breathing space for emerging market currencies and global trade settlement balances.</div>
             </div>
         </div>
     </div>
 
-    <div id="market-updates" class="tab-content">
-        <div class="grid">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">1. US 30-Year Treasury Yield Surges to 5.32%, Highest Since 2007</div>
-                    <a href="https://www.swissinfo.ch/eng/treasuries%2C-asian-bonds-extend-losses%3B-oil-gains%3A-markets-wrap/91912277" class="source-tag" target="_blank">Bloomberg | Aug 18, 06:54 GMT</a>
-                </div>
-                <p><strong>Summary:</strong> Long-dated US Treasuries extended recent sell-offs, driving the 30-year yield up 2 bps to 5.32% amid heavy government borrowing supply and sticky inflation expectations.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Higher long-end yields raise borrowing costs for sovereign debt and corporate balance sheets, compressing risk equity valuation multiples.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Bond investors are demanding higher term premiums to absorb persistent US federal budget deficits, creating structural headwinds for long-duration assets.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">2. Hong Kong Passes Sweeping Carried Interest Tax Exemption for Funds</div>
-                    <a href="https://www.theedgesingapore.com/news/hong-kong/hedge-fund-tax-break-grips-hong-kong-banks-fear-exodus" class="source-tag" target="_blank">Financial Times / Bloomberg | Aug 18, 12:37 SGT</a>
-                </div>
-                <p><strong>Summary:</strong> Hong Kong submitted a bill offering broad tax exemptions on carried interest for hedge funds, venture capital, and credit funds to rival Singapore and Dubai asset hubs.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Intensifies competition for wealth management talent across Asia, driving restructuring among regional fund management entities.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Tax incentives favor alternative fund structures, attracting new fund registrations to Hong Kong, though proprietary bank trading desks remain excluded.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">3. Brent Crude Climbs to $91.45/bbl as US-Iran Ceasefire Expires</div>
-                    <a href="https://www.businesstimes.com.sg/companies-markets" class="source-tag" target="_blank">Business Times | Aug 18, 09:45 SGT</a>
-                </div>
-                <p><strong>Summary:</strong> Crude oil futures gained over 0.6% to reach $91.45 per barrel following the expiration of the US-Iran MOU and renewed Middle East supply anxiety.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Elevated crude prices pass through to fuel and energy costs, complicating global central bank efforts to achieve target inflation rates.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Energy markets continue pricing in geopolitical risk premiums, favoring energy sector equities while pressuring fuel-sensitive transport industries.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">4. Nasdaq 100 Slips Below 30,000 as Spiking Yields Weigh on Tech</div>
-                    <a href="https://www.vantagemarkets.com/market-analysis/nas100-daily-analysis-august-18-2026/" class="source-tag" target="_blank">Vantage / Newsquawk | Aug 18, 06:01 GMT</a>
-                </div>
-                <p><strong>Summary:</strong> The Nasdaq 100 index fell below the key 30,000 psychological threshold to a session low of 29,760, pulled down by rising Treasury yields and pre-FOMC positioning.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Tech equity valuations are vulnerable to discount-rate spikes, leading to broad profit-taking in mega-cap technology shares.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Sustained equity market advances require bond yield stabilization; oversold technical indicators suggest potential short-term consolidation.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">5. Alphabet Launches A$5 Billion Bond Sale to Fund Accelerated AI CapEx</div>
-                    <a href="https://www.businesstimes.com.sg/companies-markets" class="source-tag" target="_blank">Business Times / Bloomberg | Aug 18, 09:06 SGT</a>
-                </div>
-                <p><strong>Summary:</strong> Alphabet initiated an Australian dollar corporate bond offering seeking to raise A$5 billion (US$3.6B) to fund data center expansion and generative AI infrastructure.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Demonstrates the significant capital requirements needed to maintain competitiveness in global artificial intelligence infrastructure development.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Hyperscalers are tapping international debt markets to optimize borrowing costs and diversify debt maturities to maintain aggressive CapEx spending.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">6. Kembangan Capital Partners Raises $725 Million Asian PE/VC Fund</div>
-                    <a href="https://www.theedgesingapore.com/news/singapore-trade/singapores-kembangan-capital-partners-said-raise-us725-mil-anchored-sovereign" class="source-tag" target="_blank">Bloomberg / The Edge | Aug 18, 10:45 SGT</a>
-                </div>
-                <p><strong>Summary:</strong> Singapore-based Kembangan Capital Partners raised $725 million in its first close for private equity bets across Asia, anchored by a sovereign wealth fund reallocating from US assets.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Reflects institutional capital flows shifting toward Asian technology, healthcare, and supply chain infrastructure projects.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Sovereign wealth investors are actively diversifying away from US dollar concentration, seeking higher long-term growth opportunities in Asia-Pacific private markets.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">7. Nikkei 225 Drops 1.1% to 68,460 as Energy Inflation Risks Mount</div>
-                    <a href="https://www.businesstimes.com.sg/companies-markets" class="source-tag" target="_blank">Business Times | Aug 18, 11:13 SGT</a>
-                </div>
-                <p><strong>Summary:</strong> Japan's Nikkei 225 declined 1.1% to 68,460.56 while 10-year Japanese government bond yields climbed to multi-decade highs amid imported energy inflation fears.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Japan's reliance on energy imports makes its corporate sector sensitive to spikes in global crude oil and transit costs.</p>
-                <div class="section-label">Interpretations</div>
-                <p>The Bank of Japan faces policy trade-offs as rising global bond yields and imported inflation complicate interest rate adjustments.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">8. Australian and New Zealand Dollars Trade Near Multi-Week Highs</div>
-                    <a href="https://www.businesstimes.com.sg/companies-markets" class="source-tag" target="_blank">Business Times | Aug 18, 11:11 SGT</a>
-                </div>
-                <p><strong>Summary:</strong> The Australian dollar rose to US$0.7111 as commodity export currencies outperformed the US Dollar Index following regional economic data releases.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Currency strength in commodity-exporting nations reflects solid terms of trade and sustained global demand for raw materials.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Foreign exchange markets are favoring resource-rich export economies over net energy-importing regions during global supply shocks.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">9. Xiaomi Q2 Earnings Highlight Margin Expansion in EV and Hardware</div>
-                    <a href="https://www.businesstimes.com.sg/companies-markets" class="source-tag" target="_blank">Business Times | Aug 18, 09:23 SGT</a>
-                </div>
-                <p><strong>Summary:</strong> Xiaomi reported Q2 financial results in Hong Kong, with market attention focused on EV delivery scale and gross margin resilience amid raw material cost shifts.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Serves as a key health indicator for Chinese consumer demand and electric vehicle market profitability.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Successful expansion into electric vehicles alongside core smartphone lines provides a model for Asian technology hardware diversification.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">10. Shipping Equities Rally as Strait Risks Drive Freight Rate Premiums</div>
-                    <a href="https://www.businesstimes.com.sg/companies-markets" class="source-tag" target="_blank">Newsquawk / BT | Aug 18, 2026</a>
-                </div>
-                <p><strong>Summary:</strong> Global maritime freight stocks advanced as elevated transit risks in the Persian Gulf led shipping lines to adjust spot rates and war-risk insurance surcharges.</p>
-                <div class="section-label">Why it Matters</div>
-                <p>Higher ocean freight costs increase landed import costs for international retail and manufacturing supply chains.</p>
-                <div class="section-label">Interpretations</div>
-                <p>Maritime transport serves as an operational hedge during geopolitical disruptions, where longer transit routes expand spot rate margins.</p>
-            </div>
-        </div>
+    <div class="risk-watch">
+        <h3>⚠️ What I Might Be Missing (Second-Order Risks)</h3>
+        <ul>
+            <li><strong>Persian Gulf War-Risk Insurance Multipliers:</strong> Marine hull and machinery war-risk premiums for Persian Gulf transits have surged over 300% week-on-week, threatening to quietly pass through into landed consumer goods freight surcharges across Asia and Europe. (<a href="https://www.businesstimes.com.sg" target="_blank">The Business Times</a>)</li>
+            <li><strong>Subsea Cable Maintenance Deficits:</strong> A deficit of specialized repair vessels in East Asia creates potential communication infrastructure restoration delays during seismic events. (<a href="https://www.channelnewsasia.com" target="_blank">Channel NewsAsia</a>)</li>
+            <li><strong>Midwest Agricultural Freight Constraints:</strong> Record flooding across key Indiana transport junctions threatens to delay grain shipments to export terminals, raising Q4 food commodity risks. (<a href="https://apnews.com/article/flooding-indiana-severe-weather-aa3624a3ff1a0d241f62ec980a23e856" target="_blank">Associated Press</a>)</li>
+        </ul>
     </div>
 
     <footer>
-        <p>Executive Intelligence Briefing | Generated for Financial & Geopolitical Market Analysis | August 18, 2026</p>
+        <p>Executive Intelligence Briefing | Compiled for Financial & Geopolitical Market Analysis | August 19, 2026</p>
     </footer>
 </div>
 
@@ -410,8 +555,22 @@
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
         
-        event.currentTarget.classList.add('active');
+        event.target.classList.add('active');
         document.getElementById(tabId).classList.add('active');
+    }
+
+    function filterContent() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+            let text = card.innerText.toLowerCase();
+            if (text.includes(input)) {
+                card.style.display = "flex";
+            } else {
+                card.style.display = "none";
+            }
+        });
     }
 </script>
 
