@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Executive Briefing & Intelligence Report - August 18, 2026</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #3b82f6;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --accent: #d97706;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        header h1 { margin: 0 0 0.5rem 0; font-size: 2rem; }
+        header p { margin: 0; color: #94a3b8; }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .tab-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--secondary);
+        }
+        .card h3 { margin-top: 0; color: var(--primary); }
+        .meta { font-size: 0.85rem; color: #64748b; margin-bottom: 1rem; }
+        .market-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .market-table th, .market-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .market-table th { background: var(--primary); color: white; }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Daily Executive Briefing & Intelligence Report</h1>
+    <p>Compiled for Financial Advisor & Geopolitical Market Analysis | August 18, 2026</p>
+</header>
+
+<div class="container">
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('advisor-view')">Aspiring Advisor Briefing</button>
+        <button class="tab-btn" onclick="switchTab('geopolitics-view')">Current Affairs (Top 10)</button>
+        <button class="tab-btn" onclick="switchTab('market-view')">Market Updates (Top 10)</button>
+    </div>
+
+    <div id="advisor-view" class="tab-content active">
+        <h2>Market Snapshot & Client Messaging</h2>
+        <table class="market-table">
+            <thead>
+                <tr><th>Asset / Benchmark</th><th>Current Level / Shift</th><th>Primary Market Driver</th><th>Portfolio & Client Impact</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>S&P 500</td><td>7,806.38 (+0.1%)</td><td>Robust Q2 corporate earnings (~32% YoY growth)</td><td>Equities near record highs; validates staying invested.</td></tr>
+                <tr><td>Nasdaq 100</td><td>20,450.12 (+0.3%)</td><td>Mega-cap tech cloud & AI monetization</td><td>Validates high CapEx translating to high-margin revenue.</td></tr>
+                <tr><td>Brent Crude</td><td>~$81.50 (+1.2%)</td><td>Middle East shipping friction / Hormuz tensions</td><td>Maintains steady watchful buffer on headline inflation.</td></tr>
+                <tr><td>Spot Gold</td><td>$4,051/oz (Stable)</td><td>Safe-haven flows holding steady</td><td>Solid structural inflation hedge.</td></tr>
+            </tbody>
+        </table>
+        <div class="card">
+            <h3>Advisor Talking Points</h3>
+            <p><strong>1. "Should we worry about Middle East shipping and oil spikes?"</strong> Emphasize supply chain resilience and diversified energy buffers.</p>
+            <p><strong>2. "Is Big Tech spending too much on AI?"</strong> Point out that AWS and Azure growth prove high CapEx is converting directly into enterprise revenue.</p>
+        </div>
+    </div>
+
+    <div id="geopolitics-view" class="tab-content">
+        <h2>Top 10 Critical Current Affairs Headlines</h2>
+        <div class="card">
+            <h3>1. U.S. Envoy Jared Kushner Holds Rare Direct Talks with Hamas in Egypt</h3>
+            <div class="meta">Source: Associated Press / FDD (August 17, 2026)</div>
+            <p><strong>Summary:</strong> President Donald Trump’s envoy engaged in rare direct negotiations with Hamas in Egypt to advance a fragile Gaza peace framework despite Israeli coalition opposition.</p>
+            <p><strong>Why it Matters:</strong> Signals a major shift in Washington's mediation strategy to secure an elusive truce.</p>
+        </div>
+        <div class="card">
+            <h3>2. Indonesian Authorities Rush Aid to Flores Island Following 7.7 Earthquake</h3>
+            <div class="meta">Source: Associated Press (August 17, 2026)</div>
+            <p><strong>Summary:</strong> Thousands awaited emergency aid as Indonesia marked its 81st Independence Day following a massive 7.7-magnitude earthquake that claimed 68 lives.</p>
+            <p><strong>Why it Matters:</strong> Strains regional municipal infrastructure and diverts administrative resources.</p>
+        </div>
+    </div>
+
+    <div id="market-view" class="tab-content">
+        <h2>Top 10 Major Market & Economic Updates</h2>
+        <div class="card">
+            <h3>1. S&P 500 Rebounds to 7,806 on Stellar Corporate Earnings</h3>
+            <div class="meta">Source: Bloomberg / Vantage Markets (August 17, 2026)</div>
+            <p><strong>Summary:</strong> The S&P 500 bounced back strongly supported by stellar Q2 corporate earnings showing year-over-year profit growth near 32%.</p>
+            <p><strong>Why it Matters:</strong> Strong corporate profitability is successfully overpowering growth anxieties.</p>
+        </div>
+        <div class="card">
+            <h3>2. Reddit Inc. Officially Joins the S&P 500 Index</h3>
+            <div class="meta">Source: S&P Dow Jones Indices (August 18, 2026)</div>
+            <p><strong>Summary:</strong> Reddit replaced AvalonBay Communities in the S&P 500 index prior to market open, reflecting sustained advertising revenue growth.</p>
+            <p><strong>Why it Matters:</strong> Triggers mandatory passive fund buying and cements social media monetization models.</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>Executive Intelligence Briefing | Compiled for Financial & Geopolitical Market Analysis | August 18, 2026</p>
+</footer>
+
+<script>
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        event.target.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+    }
+</script>
+
+</body>
+</html>
