@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Situation Room — Geopolitical &amp; Markets Briefing — 24 Aug 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d10;
+    --panel:#12161b;
+    --panel-2:#151a20;
+    --border:#232a33;
+    --hairline:#1c222b;
+    --text:#e7eaee;
+    --muted:#8993a1;
+    --muted-2:#5f6a78;
+    --green:#21c486;
+    --red:#ff5470;
+    --amber:#f2a93b;
+    --blue:#4fa3ff;
+    --mono:'IBM Plex Mono', monospace;
+    --sans:'IBM Plex Sans', sans-serif;
+    --disp:'Space Grotesk', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--sans);}
+  ::selection{background:var(--blue);color:#04070a;}
+  a{color:var(--blue);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible, .tab:focus-visible{outline:2px solid var(--blue);outline-offset:2px;}
+
+  .ticker-wrap{
+    background:#070a0d;
+    border-bottom:1px solid var(--hairline);
+    overflow:hidden;
+    white-space:nowrap;
+    position:sticky; top:0; z-index:50;
+  }
+  .ticker-track{
+    display:inline-flex;
+    animation:scroll 42s linear infinite;
+    padding:9px 0;
+  }
+  .ticker-wrap:hover .ticker-track{animation-play-state:paused;}
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+  .tick{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.02em;
+    padding:0 22px;
+    border-right:1px solid var(--hairline);
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    color:var(--muted);
+  }
+  .tick b{color:var(--text);font-weight:600;}
+  .tick .up{color:var(--green);}
+  .tick .down{color:var(--red);}
+  .tick .flat{color:var(--amber);}
+
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{animation:none;}
+  }
+
+  header{
+    max-width:1180px;
+    margin:0 auto;
+    padding:44px 28px 26px;
+    border-bottom:1px solid var(--hairline);
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px rgba(255,84,112,0.15);}
+  h1{
+    font-family:var(--disp);
+    font-weight:700;
+    font-size:clamp(34px,5vw,54px);
+    line-height:1.02;
+    margin:14px 0 10px;
+    letter-spacing:-0.01em;
+  }
+  h1 span{color:var(--muted-2);font-weight:500;}
+  .sub{
+    font-family:var(--sans);
+    color:var(--muted);
+    font-size:15px;
+    max-width:640px;
+    line-height:1.55;
+  }
+  .meta-row{
+    margin-top:22px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:26px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--muted-2);
+  }
+  .meta-row div span{display:block;color:var(--text);font-size:13px;margin-top:3px;}
+
+  .tabbar{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 28px;
+    display:flex;
+    gap:2px;
+    border-bottom:1px solid var(--hairline);
+    position:sticky;
+    top:39px;
+    background:var(--bg);
+    z-index:40;
+  }
+  .tab{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    background:none;
+    border:none;
+    padding:16px 18px;
+    cursor:pointer;
+    border-bottom:2px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+    display:flex;
+    align-items:center;
+    gap:9px;
+  }
+  .tab .n{
+    font-size:10.5px;
+    color:var(--muted-2);
+    border:1px solid var(--border);
+    border-radius:3px;
+    padding:1px 5px;
+  }
+  .tab:hover{color:var(--text);}
+  .tab.active{color:var(--text);border-bottom-color:var(--blue);}
+  .tab.active .n{color:var(--blue);border-color:var(--blue);}
+
+  main{max-width:1180px;margin:0 auto;padding:36px 28px 90px;}
+  .panel-view{display:none;animation:fade .25s ease;}
+  .panel-view.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+  .section-label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--blue);
+    margin:0 0 14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section-label::after{content:'';flex:1;height:1px;background:var(--hairline);}
+
+  .brief-lede{
+    font-size:17px;
+    line-height:1.68;
+    color:#d4d8de;
+    max-width:840px;
+    margin-bottom:34px;
+  }
+  .brief-lede b{color:var(--text);}
+
+  .gauge-block{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:36px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:28px;
+    margin-bottom:34px;
+  }
+  @media(max-width:720px){.gauge-block{grid-template-columns:1fr;}}
+  .gauge-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .gauge-label{
+    margin-top:10px;
+    font-family:var(--disp);
+    font-weight:600;
+    font-size:20px;
+    color:var(--red);
+  }
+  .gauge-sub{font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:0.08em;text-transform:uppercase;margin-top:2px;}
+  .gauge-rationale h4{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 12px;
+  }
+  .gauge-rationale ul{margin:0;padding-left:18px;color:#c7cdd4;font-size:14.5px;line-height:1.65;}
+  .gauge-rationale li{margin-bottom:9px;}
+  .gauge-rationale li b{color:var(--text);}
+
+  .theme-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(255px,1fr));
+    gap:16px;
+    margin-bottom:38px;
+  }
+  .theme-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-left:3px solid var(--blue);
+    border-radius:8px;
+    padding:20px 20px 22px;
+  }
+  .theme-card.risk-hi{border-left-color:var(--red);}
+  .theme-card.risk-med{border-left-color:var(--amber);}
+  .theme-card.risk-lo{border-left-color:var(--green);}
+  .theme-card .tk{font-family:var(--mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted-2);margin-bottom:8px;}
+  .theme-card h3{font-family:var(--disp);font-size:17px;margin:0 0 8px;line-height:1.3;}
+  .theme-card p{font-size:13.5px;color:var(--muted);line-height:1.55;margin:0;}
+
+  .addon-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    margin-bottom:10px;
+  }
+  @media(max-width:800px){.addon-grid{grid-template-columns:1fr;}}
+  .addon-col ul{margin:0;padding-left:18px;}
+  .addon-col li{font-size:14px;line-height:1.65;color:#c7cdd4;margin-bottom:12px;}
+  .addon-col li b{color:var(--text);}
+  .addon-col li .tag{
+    font-family:var(--mono);
+    font-size:9.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--bg);
+    background:var(--amber);
+    border-radius:3px;
+    padding:1px 6px;
+    margin-right:7px;
+    display:inline-block;
+    vertical-align:middle;
+  }
+
+  .missing-block{
+    margin-top:40px;
+    background:linear-gradient(180deg,rgba(242,169,59,0.06),rgba(242,169,59,0));
+    border:1px dashed #4a3d24;
+    border-radius:10px;
+    padding:26px 28px 8px;
+  }
+  .missing-block .section-label{color:var(--amber);}
+  .missing-block .section-label::after{background:#3a2e18;}
+
+  .card-list{display:flex;flex-direction:column;gap:14px;}
+  .card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:22px 24px;
+  }
+  .card-head{display:flex;gap:16px;align-items:flex-start;}
+  .card-num{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--muted-2);
+    padding-top:3px;
+    min-width:26px;
+  }
+  .card-title-wrap{flex:1;}
+  .card h3{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.32;margin:0 0 8px;}
+  .src-line{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--muted-2);
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    align-items:center;
+  }
+  .src-line a{color:var(--blue);}
+  .badge{
+    font-family:var(--mono);
+    font-size:9.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    border-radius:3px;
+    padding:2px 7px;
+    border:1px solid var(--border);
+    color:var(--muted);
+    white-space:nowrap;
+    margin-left:auto;
+  }
+  .badge.geo{color:var(--red);border-color:#4a2530;}
+  .badge.mkt{color:var(--green);border-color:#1f4a3a;}
+
+  .card-body{margin-top:14px;padding-left:42px;}
+  .card-body p{font-size:14.5px;line-height:1.65;color:#c7cdd4;margin:0 0 10px;}
+  .card-body .kicker{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--muted-2);
+    display:block;
+    margin-bottom:4px;
+  }
+  .why-block{
+    border-left:2px solid var(--amber);
+    padding:2px 0 2px 14px;
+    margin:14px 0;
+  }
+  details{margin-top:10px;}
+  details summary{
+    cursor:pointer;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--blue);
+    list-style:none;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 0;
+  }
+  details summary::-webkit-details-marker{display:none;}
+  details summary::before{content:'▸';font-size:10px;transition:transform .15s ease;}
+  details[open] summary::before{transform:rotate(90deg);}
+  details .interp{
+    font-size:14px;
+    line-height:1.65;
+    color:#b7bdc6;
+    padding:6px 4px 4px 4px;
+    border-top:1px solid var(--hairline);
+    margin-top:4px;
+  }
+
+  .snap-grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:18px;
+    margin-bottom:14px;
+  }
+  @media(max-width:860px){.snap-grid{grid-template-columns:1fr;}}
+  .snap-panel{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:22px 24px;
+  }
+  .snap-panel h4{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 16px;
+  }
+  table.idx{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px;}
+  table.idx td{padding:8px 4px;border-bottom:1px solid var(--hairline);}
+  table.idx td:first-child{color:var(--muted);}
+  table.idx td:nth-child(2){color:var(--text);text-align:right;font-weight:600;}
+  table.idx td:nth-child(3){text-align:right;width:70px;}
+  .sent-row{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+  .sent-pill{
+    font-family:var(--disp);
+    font-weight:700;
+    font-size:15px;
+    padding:7px 16px;
+    border-radius:20px;
+    background:rgba(33,196,134,0.12);
+    color:var(--green);
+    border:1px solid #1f4a3a;
+  }
+  .snap-panel .sent-note{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 14px;}
+  .snap-panel ul.rationale{margin:0;padding-left:16px;font-size:13.5px;color:#c7cdd4;line-height:1.6;}
+  .snap-panel ul.rationale li{margin-bottom:8px;}
+
+  .mkt-subhead{
+    margin:38px 0 16px;
+    font-family:var(--disp);
+    font-size:20px;
+    font-weight:600;
+  }
+
+  footer{
+    max-width:1180px;margin:0 auto;padding:30px 28px 60px;
+    border-top:1px solid var(--hairline);
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--muted-2);
+    line-height:1.7;
+  }
+  footer b{color:var(--muted);}
+</style>
+</head>
+<body>
+
+<div class="ticker-wrap">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<header>
+  <div class="eyebrow"><span class="dot"></span> LIVE DESK BRIEFING · 24 AUG 2026</div>
+  <h1>Situation Room<br><span>Geopolitical &amp; Markets Briefing</span></h1>
+  <p class="sub">A 24-hour synthesis of the highest-signal developments in world affairs and capital markets, filtered for what actually moves policy, prices, and risk — not noise.</p>
+  <div class="meta-row">
+    <div>COVERAGE WINDOW<span>23–24 Aug 2026, 24h</span></div>
+    <div>DESK<span>Senior Geopolitical &amp; Markets Analyst</span></div>
+    <div>SOURCING<span>Reuters · Bloomberg · AP · CNBC · CNN · NBC · Al Jazeera · Fed</span></div>
+    <div>ITEMS COVERED<span>15 Current Affairs · 15 Market Updates</span></div>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <button class="tab active" data-tab="brief">Aspiring Advisor Briefing <span class="n">00</span></button>
+  <button class="tab" data-tab="geo">Current Affairs <span class="n">15</span></button>
+  <button class="tab" data-tab="mkt">Market Updates <span class="n">15</span></button>
+  <a href="weekly_brief.html"><button class="tab" data-tab="mkt">Weekly Updates </button></a>
+</nav>
+
+<main>
+
+  <!-- ================= BRIEFING TAB ================= -->
+  <section class="panel-view active" id="panel-brief">
+    <div class="section-label">Executive Read</div>
+    <p class="brief-lede">
+      The dominant story into this week is a hard deadline: Treasury Secretary Scott Bessent holds a press conference today at 2pm ET to unveil what he has billed as <b>"the toughest sanctions in history"</b> on Iran — explicitly aimed at forcing China and other trading partners to choose between Tehran and Washington. Iran has responded by threatening to halt <i>all</i> Persian Gulf oil flow if any neighboring state joins the US pressure campaign, even as it quietly grants Iraqi tankers selective passage through Hormuz — a signal Tehran still wants leverage, not total war. Meanwhile the US-Canada trade relationship reignited over the weekend after talks collapsed and 50% tariffs took effect, and markets are entering the week with unusual cross-currents: a weaker dollar, a resurgent bitcoin, gold above $4,500, and equities near multi-week highs — all simultaneously, an unusual combination that reflects the Treasury's aggressive bond-buyback intervention doing more to set the tone than either the Fed or the Iran crisis right now. Gaza's ceasefire remains a fragile, incremental process; Ukraine's corruption headlines are complicating its wartime governance narrative even as it keeps striking Russian logistics targets.
+    </p>
+
+    <div class="gauge-block">
+      <div class="gauge-wrap">
+        <svg width="240" height="150" viewBox="0 0 240 150">
+          <defs>
+            <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#ff5470"/>
+              <stop offset="50%" stop-color="#f2a93b"/>
+              <stop offset="100%" stop-color="#21c486"/>
+            </linearGradient>
+          </defs>
+          <path d="M 20 130 A 100 100 0 0 1 220 130" fill="none" stroke="#1c222b" stroke-width="16" stroke-linecap="round"/>
+          <path d="M 20 130 A 100 100 0 0 1 220 130" fill="none" stroke="url(#gaugeGrad)" stroke-width="16" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="0" opacity="0.9"/>
+          <line x1="120" y1="130" x2="158" y2="52" stroke="#e7eaee" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="120" cy="130" r="7" fill="#e7eaee"/>
+        </svg>
+        <div class="gauge-label">CAUTIOUSLY BULLISH</div>
+        <div class="gauge-sub">Liquidity-driven risk-on, geopolitics unresolved</div>
+      </div>
+      <div class="gauge-rationale">
+        <h4>Why This Read</h4>
+        <ul>
+          <li><b>Bullish pull:</b> Treasury's expanded bond buybacks have pushed the dollar to a three-month low and yields off their highs, fueling simultaneous rallies in gold, bitcoin (+22% on the week), and equities — a genuine liquidity tailwind, not just sentiment.</li>
+          <li><b>Bearish offset:</b> Monday's Iran sanctions rollout, a reignited US-Canada trade war, and Brent crude near $94 (a two-week ~6% gain) are all live catalysts that could reverse the mood quickly if any one of them escalates.</li>
+          <li><b>Net read:</b> This is a "liquidity beats geopolitics" market for now — but it's a fragile equilibrium built on continued Treasury intervention. A hawkish surprise from Monday's sanctions announcement or a Hormuz incident would test it immediately.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-label">Four Threads to Watch</div>
+    <div class="theme-grid">
+      <div class="theme-card risk-hi">
+        <div class="tk">Thread 01 · Deadline Today</div>
+        <h3>Bessent's "Economic D-Day" on Iran</h3>
+        <p>Monday's 2pm ET press conference will detail secondary sanctions aimed squarely at China. Iran has threatened to cut all Gulf oil flow if neighbors comply — the highest-stakes single event of the week.</p>
+      </div>
+      <div class="theme-card risk-lo">
+        <div class="tk">Thread 02 · Liquidity-Driven</div>
+        <h3>Treasury Intervention Reflates Risk Assets</h3>
+        <p>Doubled bond buybacks have simultaneously weakened the dollar and lifted gold, bitcoin, and equities — an unusual multi-asset rally built on one policy lever.</p>
+      </div>
+      <div class="theme-card risk-med">
+        <div class="tk">Thread 03 · Reignited</div>
+        <h3>US-Canada Trade War Returns</h3>
+        <p>Talks collapsed Friday; 50% tariffs on ~$20B of Canadian goods are now in effect, with Ottawa vowing dollar-for-dollar retaliation from Sept. 8.</p>
+      </div>
+      <div class="theme-card risk-med">
+        <div class="tk">Thread 04 · Upcoming Catalyst</div>
+        <h3>Jackson Hole Collides With Nvidia Earnings</h3>
+        <p>Fed Chair Warsh's Aug. 28 keynote lands less than 36 hours after Nvidia reports — two of the year's biggest catalysts back-to-back.</p>
+      </div>
+    </div>
+
+    <div class="section-label">Add-Ons — Deeper Angles</div>
+    <div class="addon-grid">
+      <div class="addon-col">
+        <ul>
+          <li><span class="tag">Link</span><b>Sanctions target China, not just Iran:</b> Bessent's framing — "you are either with us or against us" — is really a message to Beijing, which draws roughly half its energy from inside the Gulf. China's response (or lack thereof) may matter more for oil prices than anything Iran itself does this week.</li>
+          <li><span class="tag">Link</span><b>Iran's selective Hormuz access is a signal:</b> Granting Iraqi tankers passage while threatening total closure shows Tehran is still calibrating pressure rather than going for broke — a rational actor still negotiating through actions, not just rhetoric.</li>
+          <li><span class="tag">Watch</span><b>Six EU states' windfall oil tax proposal:</b> Germany, Italy, Austria, Poland, Portugal and Spain are drafting a windfall tax on oil profits inflated by the Iran war — a preview of how European fiscal politics may respond if energy prices stay elevated into winter.</li>
+        </ul>
+      </div>
+      <div class="addon-col">
+        <ul>
+          <li><span class="tag">Contrast</span><b>Crypto's regulatory tailwind:</b> Bitcoin's surge is as much a Washington story as a market one — a White House meeting with crypto executives and progress on the Clarity Act did more for BTC this week than any technical setup.</li>
+          <li><span class="tag">Political</span><b>Trade war meets election politics:</b> Carney's "designed to hurt us and divide us" framing plays domestically in Canada much like Trump's tariff rhetoric plays for his base — both leaders are using trade conflict as a unifying political tool, not just an economic lever.</li>
+          <li><span class="tag">Technical</span><b>Treasury's buyback playbook is being repeated:</b> This is the second consecutive week the Treasury has leaned on debt buybacks to manage yields — a tool now clearly part of the standing policy toolkit rather than a one-off emergency measure.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="missing-block">
+      <div class="section-label">What I Might Be Missing</div>
+      <ul style="padding-left:18px; margin:0 0 22px; color:#c7cdd4; font-size:14.5px; line-height:1.75;">
+        <li><b>Ukraine's Defense Ministry corruption allegations</b> from former minister Fedorov are a bigger story than the headline volume suggests — a call for wartime elections layered on top of corruption claims could reshape Kyiv's domestic politics well before any peace deal materializes.</li>
+        <li><b>The Japan earthquake (5.9-magnitude, 37+ injured)</b> is a reminder that a major natural disaster in a G7 economy during an already-stressed global bond market could compound fiscal and supply-chain pressure in ways markets aren't currently pricing.</li>
+        <li><b>Israel's internal legal fights</b> — the High Court blocking Justice Minister Levin's police appointments, and the Shin Bet security-detail controversy around opposition candidate Eisenkot — are quietly eroding institutional norms ahead of Netanyahu's October election, a slower-moving story than Gaza but potentially just as consequential domestically.</li>
+        <li><b>China's silence so far on Monday's sanctions</b> is conspicuous. Beijing has publicly rebuffed US pressure to date, but a formal response (or absence of one) after Bessent's announcement will be a genuine signal of how far this escalates.</li>
+        <li><b>The Russell 2000's underperformance</b> relative to large-cap rallies is a quiet divergence — small caps are more sensitive to both credit conditions and domestic economic softness, and their lag could be an early tell if the "liquidity rally" isn't broad-based.</li>
+        <li><b>Germany's domestic political temperature</b> — Chancellor Merz booed at a public event amid drought and flooding — is a reminder that European leaders face rising public patience tests just as they're being asked to consider new energy windfall taxes.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= CURRENT AFFAIRS TAB ================= -->
+  <section class="panel-view" id="panel-geo">
+    <div class="section-label">Top 15 Critical Headlines — Last 24 Hours</div>
+    <div class="card-list" id="geoList"></div>
+  </section>
+
+  <!-- ================= MARKET UPDATES TAB ================= -->
+  <section class="panel-view" id="panel-mkt">
+    <div class="section-label">Market Situation Snapshot</div>
+    <div class="snap-grid">
+      <div class="snap-panel">
+        <h4>Index &amp; Commodity Moves (Latest Session, 21–24 Aug 2026)</h4>
+        <table class="idx" id="idxTable"></table>
+      </div>
+      <div class="snap-panel">
+        <h4>Overall Sentiment</h4>
+        <div class="sent-row"><span class="sent-pill">CAUTIOUSLY BULLISH</span></div>
+        <p class="sent-note">Risk assets are rallying broadly on Treasury-driven dollar weakness and yield relief, even as unresolved Iran sanctions and a reignited Canada trade war sit as live tail risks for the week ahead.</p>
+        <ul class="rationale">
+          <li><b>For risk-on:</b> Dollar Index near a three-month low; gold above $4,500 on a third straight weekly gain; bitcoin up 22% on the week; equities near multi-week highs after a volatile stretch.</li>
+          <li><b>For risk-off:</b> Brent near $94 on a two-week ~6% gain; Bessent's Monday sanctions announcement and its China dimension are unresolved; US-Canada tariffs just took effect; Jackson Hole and Nvidia earnings both loom within days.</li>
+          <li><b>Balance:</b> The Treasury's liquidity intervention is currently the single biggest driver across asset classes — bigger than the Fed, bigger than Iran. That makes this rally powerful but narrow in its underlying support.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mkt-subhead">Top 15 Market &amp; Economic Updates</div>
+    <div class="card-list" id="mktList"></div>
+  </section>
+
+</main>
+
+<footer>
+  <b>Sourcing note:</b> Every item below links directly to the cited publication. Figures reflect the most recent verified prints as of the 23–24 Aug 2026 window; where a source's exact intraday timestamp varies, the most recent and authoritative figure available was used, with the session noted alongside each price.<br>
+  <b>Methodology:</b> Prioritized for signal — items with direct policy, market, or systemic-risk relevance were selected over routine commentary, opinion pieces, or promotional releases. This briefing is for informational and educational purposes and does not constitute investment or legal advice.
+</footer>
+
+<script>
+/* ---------------- Ticker Tape Data ---------------- */
+const tickers = [
+  {t:'S&P 500', v:'7,712.49', d:'+0.27%', dir:'up'},
+  {t:'NASDAQ', v:'26,237.89', d:'-0.20%', dir:'down'},
+  {t:'DOW', v:'53,520.71', d:'+0.33%', dir:'up'},
+  {t:'RUSSELL 2000', v:'3,042.60', d:'+0.82%', dir:'up'},
+  {t:'BRENT', v:'$94.39', d:'+0.65%', dir:'up'},
+  {t:'WTI', v:'$86.20', d:'flat/up', dir:'flat'},
+  {t:'GOLD', v:'$4,500+', d:'+~5% (wk)', dir:'up'},
+  {t:'BITCOIN', v:'$78,335', d:'+22% (wk)', dir:'up'},
+  {t:'DXY', v:'98.97', d:'-0.69%', dir:'down'},
+  {t:'US10Y', v:'~4.70%', d:'regained', dir:'flat'},
+  {t:'VIX', v:'15.39', d:'-2.84%', dir:'down'},
+];
+const track = document.getElementById('tickerTrack');
+function buildTicker(){
+  let html = '';
+  for(let r=0;r<2;r++){
+    tickers.forEach(x=>{
+      html += `<span class="tick">${x.t} <b>${x.v}</b> <span class="${x.dir}">${x.d}</span></span>`;
+    });
+  }
+  track.innerHTML = html;
+}
+buildTicker();
+
+/* ---------------- Tabs ---------------- */
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel-view').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0, behavior:'instant'});
+  });
+});
+
+/* ---------------- Card renderer ---------------- */
+function cardHTML(n, item, kind){
+  const badgeClass = kind === 'geo' ? 'geo' : 'mkt';
+  const badgeText = kind === 'geo' ? item.region : item.assetTag;
+  return `
+  <article class="card">
+    <div class="card-head">
+      <div class="card-num">${String(n).padStart(2,'0')}</div>
+      <div class="card-title-wrap">
+        <h3>${item.headline}</h3>
+        <div class="src-line">
+          <span>${item.source}</span>·<span>${item.timestamp}</span>·<a href="${item.url}" target="_blank" rel="noopener">View source ↗</a>
+          <span class="badge ${badgeClass}">${badgeText}</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <span class="kicker">Summary</span>
+      <p>${item.summary}</p>
+      <div class="why-block">
+        <span class="kicker">Why It Matters</span>
+        <p style="margin-bottom:0;">${item.why}</p>
+      </div>
+      <details>
+        <summary>Analyst Interpretation</summary>
+        <div class="interp">${item.interp}</div>
+      </details>
+    </div>
+  </article>`;
+}
+
+/* ---------------- CURRENT AFFAIRS DATA ---------------- */
+const geoItems = [
+  {
+    headline:"Bessent to Unveil \u201cToughest Sanctions in History\u201d on Iran Today",
+    source:"CNBC", timestamp:"23 Aug 2026",
+    url:"https://www.cnbc.com/2026/08/23/treasury-secretary-bessent-iran-sanctions-press-conference.html",
+    region:"Iran / US",
+    summary:"Treasury Secretary Scott Bessent will hold a 2pm ET press conference today to detail what he has called the greatest campaign of coordinated economic isolation in history, explicitly urging China and other Iran trading partners to cut ties or face consequences. Iran dismissed the threat as an 'implicit admission' of US weakness.",
+    why:"This is the single highest-stakes scheduled event of the week — the specifics of secondary sanctions targeting China (Iran's largest oil buyer) will determine whether this is symbolic pressure or a genuine supply-chain shock to global energy markets.",
+    interp:"Bessent's explicit 'with us or against us' framing toward Beijing is the real story here — this is less about Iran's economy (already battered) and more about forcing a US-China confrontation over enforcement. China's response, not Iran's, is the variable markets should watch most closely this week."
+  },
+  {
+    headline:"Iran Threatens to Halt All Persian Gulf Oil If Neighbors Join US Pressure",
+    source:"CNN Live Updates", timestamp:"22 Aug 2026",
+    url:"https://www.cnn.com/2026/08/22/world/live-news/iran-war-trump",
+    region:"Iran / Gulf",
+    summary:"Mohsen Rezaei, secretary of Iran's Supreme National Security Council, warned that if any neighboring country joins the US economic campaign, Tehran will block all oil flow through the Persian Gulf, not just the Strait of Hormuz. The US Department of Energy estimates 8-9 million barrels per day are still moving through the strait via 'dark transits.'",
+    why:"This raises the stakes beyond the Hormuz chokepoint to the entire Gulf, threatening supply routes that Gulf Arab states rely on even when not directly involved in the US-Iran standoff.",
+    interp:"The threat is likely aimed at deterring Gulf states from visibly cooperating with Monday's sanctions rather than a genuine plan to shut all Gulf shipping — Iran has strong incentive to keep some oil moving for its own revenue. But the rhetoric alone adds a risk premium regional producers can't ignore."
+  },
+  {
+    headline:"Iran Grants Selective Passage to Iraqi Oil Tankers Through Hormuz",
+    source:"Al Jazeera", timestamp:"22 Aug 2026",
+    url:"https://www.aljazeera.com/news/2026/8/22/iran-grants-permission-for-some-iraqi-oil-tankers-to-pass-through-hormuz",
+    region:"Iran / Iraq",
+    summary:"Iran has granted permission for a number of Iraqi oil tankers to transit the Strait of Hormuz following repeated requests from Baghdad, according to Iranian state media, while Iraq's president said his country's territory won't be used to launch attacks on any other state.",
+    why:"Iraq has been among the countries most economically damaged by Iran's effective closure of Hormuz; this selective exemption shows Tehran retains room to calibrate pressure rather than enforcing a uniform blockade.",
+    interp:"This is a useful data point for reading Iran's actual strategy: total closure would alienate Iraq, a neighbor and informal ally, for no strategic gain. Iran appears to be using the blockade as a scalpel against adversaries rather than a blunt instrument against everyone — a sign of continued rational calculation rather than open-ended escalation."
+  },
+  {
+    headline:"US-Canada Trade War Reignites as Talks Collapse, 50% Tariffs Take Effect",
+    source:"CNN Business / CBC", timestamp:"21\u201323 Aug 2026",
+    url:"https://www.cnn.com/2026/08/21/economy/us-canada-trade",
+    region:"US / Canada",
+    summary:"Trade talks between Washington and Ottawa broke down Friday night after the US proposed terms Canada called 'uneconomic, unfair.' PM Mark Carney said the new US tariffs are 'designed to hurt us and divide us' and announced Canada will match them dollar-for-dollar from September 8, targeting steel, dairy, appliances, agricultural equipment, pulp, paper, and electronics.",
+    why:"This reverses the brief tariff pause reported earlier in the week, confirming that US-Canada trade tension is structural rather than a one-off dispute — with real costs to integrated auto, agriculture, and manufacturing supply chains on both sides of the border.",
+    interp:"Carney's response — matching tariffs while simultaneously touting Canada's diversification into 20+ other trade deals — signals Ottawa is playing a longer game of reducing dependence on the US market rather than seeking a quick resolution. Watch whether this becomes a template for how Canada handles future US trade disputes: retaliate proportionally, then pivot outward."
+  },
+  {
+    headline:"Kushner, Netanyahu Agree US General Should Oversee Hamas Disarmament",
+    source:"NBC News", timestamp:"17\u201318 Aug 2026 (developing)",
+    url:"https://www.nbcnews.com/world/gaza/kushner-netanyahu-hamas-talks-gaza-plan-peace-trump-rcna592871",
+    region:"Israel / Gaza",
+    summary:"Jared Kushner and Prime Minister Netanyahu agreed that Gaza's 'demilitarization' should begin with a Hamas weapons handover supervised by an American military general, according to a senior Israeli official — a concrete mechanism emerging from the stalled 15-point roadmap talks.",
+    why:"This is the first specific operational detail to emerge from weeks of shuttle diplomacy — a US general overseeing disarmament would represent direct American military involvement in Gaza's post-war transition, a significant escalation of US footprint in the process.",
+    interp:"Assigning a named US oversight mechanism suggests Washington is trying to build a structure Netanyahu's government can accept without the political cost of appearing to negotiate directly with Hamas. Whether Hamas accepts US military oversight of its own disarmament is the next major test — and far from guaranteed given the group's public statements insisting on Palestinian-led governance."
+  },
+  {
+    headline:"Israel Strikes Hamas Weapons Site, Kills Commander Amid Kite Tensions",
+    source:"Times of Israel", timestamp:"23 Aug 2026",
+    url:"https://www.timesofisrael.com/liveblog-august-23-2026/",
+    region:"Israel / Gaza",
+    summary:"The Israeli Air Force bombed a Hamas weapons production site in central Gaza and killed a commander in separate strikes, after Netanyahu and Defense Minister Katz warned Hamas that if kite and incendiary-balloon launches toward Israeli border communities don't stop, the IDF will intensify strikes and evacuate surrounding areas.",
+    why:"Continued Israeli strikes despite the nominal ceasefire illustrate how fragile the current arrangement is — each incident risks a wider escalation that could derail the broader roadmap talks just as they show signs of operational progress.",
+    interp:"The kite/balloon reference is notable — this was a hallmark tactic of the pre-2023 Gaza conflict, and its reappearance suggests some elements of the old conflict pattern persisting even amid a formal ceasefire process. It's a reminder that a 'ceasefire' status can coexist with near-daily low-intensity violence."
+  },
+  {
+    headline:"Israeli High Court Blocks Politicized Police-Oversight Appointments",
+    source:"Times of Israel", timestamp:"23 Aug 2026",
+    url:"https://www.timesofisrael.com/liveblog-august-23-2026/",
+    region:"Israel Domestic",
+    summary:"Israel's High Court of Justice issued a temporary injunction blocking Justice Minister Yariv Levin from making appointments to a newly politicized Department of Internal Police Investigations, a body responsible for investigating police conduct.",
+    why:"This is part of a broader, ongoing struggle over judicial independence and executive overreach in Israel that predates and runs parallel to the Gaza and Iran crises, with direct implications for institutional checks on power.",
+    interp:"Coming amid Netanyahu's approach to an October election, disputes over control of oversight bodies read as part of a consistent pattern of consolidating executive influence over independent institutions — worth watching alongside the Gaza and security stories as a measure of Israel's internal political trajectory."
+  },
+  {
+    headline:"Shin Bet Chief Confirms Denying Opposition Candidate a Security Detail",
+    source:"Times of Israel", timestamp:"23 Aug 2026",
+    url:"https://www.timesofisrael.com/liveblog-august-23-2026/",
+    region:"Israel Domestic",
+    summary:"Israel's Shin Bet security service chief confirmed he personally made the decision not to provide a security detail to centrist challenger Gadi Eisenkot ahead of the October 27 election, a decision that has drawn scrutiny given Eisenkot's status as a serious Netanyahu rival.",
+    why:"Security-detail decisions for political candidates carry real safety implications, and in a country with a history of political assassination, any perception of political influence over such decisions is highly sensitive.",
+    interp:"Whether this reflects a genuine security assessment or has political undertones will likely become a campaign issue in itself — either way, it adds another layer of institutional friction to an already tense pre-election environment in Israel."
+  },
+  {
+    headline:"Ukraine Drone Strike Hits Russian Logistics Hub in Orenburg",
+    source:"The Kyiv Independent", timestamp:"23 Aug 2026",
+    url:"https://kyivindependent.com/tag/peace-negotiations/",
+    region:"Ukraine / Russia",
+    summary:"Ukraine's military reportedly launched a drone attack overnight on the Russian city of Orenburg, striking an Ozon logistics center, according to Russian Telegram channels — part of continued deep-strike operations even as diplomatic contacts continue.",
+    why:"Deep strikes into Russian territory well beyond the front line demonstrate Ukraine's continued long-range strike capability and willingness to impose economic costs on Russian infrastructure even amid periodic peace-talk signals.",
+    interp:"Russian casualty figures reported over the same period (1,310 in a single day per Ukrainian claims) alongside continued drone strikes suggest neither side sees the current diplomatic track as reason to slow military operations — a pattern consistent with using battlefield leverage to shape negotiating positions rather than genuine de-escalation."
+  },
+  {
+    headline:"Former Ukrainian Defense Minister Alleges Widespread Corruption",
+    source:"The Kyiv Independent", timestamp:"22 Aug 2026",
+    url:"https://kyivindependent.com/tag/peace-negotiations/",
+    region:"Ukraine Domestic",
+    summary:"Former Defense Minister Mykhailo Fedorov detailed what he described as widespread corruption within Ukraine's Defense Ministry in a wide-ranging interview, while reiterating calls for Ukraine to prepare for elections even as the war continues.",
+    why:"Corruption allegations from a former senior official carry more institutional weight than opposition criticism and could further complicate Ukraine's case for continued Western financial and military support at a critical juncture.",
+    interp:"The pairing of corruption allegations with calls for wartime elections suggests Fedorov may be positioning politically — whether as principled reform advocacy or maneuvering ahead of an eventual peace settlement and post-war political realignment, this is a story with more downstream political significance than its current headline treatment suggests."
+  },
+  {
+    headline:"Six EU Nations Push Windfall Tax on Oil Profits Amid War-Driven Price Surge",
+    source:"Euronews / Rio Times Intelligence Brief", timestamp:"23 Aug 2026",
+    url:"https://www.riotimesonline.com/europe-intelligence-brief-sunday-august-23-2026/",
+    region:"European Union",
+    summary:"Germany, Italy, Austria, Poland, Portugal, and Spain are drafting a proposal for EU finance ministers to discuss a windfall tax on oil company profits at next month's informal meeting in Dublin, citing producer earnings inflated by the Middle East war.",
+    why:"A coordinated EU windfall tax would directly affect energy-sector earnings and could set a precedent other regions follow if energy prices remain elevated through the winter heating season.",
+    interp:"That the letter is still in draft form and unsent suggests this is currently more a signal of political appetite than an imminent policy — but the fact that six major EU economies are aligned on the concept indicates real momentum, worth monitoring ahead of the Dublin meeting."
+  },
+  {
+    headline:"Fed Chair Warsh to Deliver First Jackson Hole Keynote August 28",
+    source:"Bloomberg", timestamp:"22 Aug 2026",
+    url:"https://www.bloomberg.com/news/articles/2026-08-22/kevin-warsh-to-make-first-jackson-hole-speech-as-fed-chair",
+    region:"US Fed Policy",
+    summary:"New Federal Reserve Chair Kevin Warsh will deliver his inaugural Jackson Hole keynote on Friday, August 28, with investors seeking clarity on how the central bank will respond to stubborn inflation. Warsh has told reporters he views the speech's contents as still a 'blank piece of paper.'",
+    why:"This is one of the most closely watched events for markets in the coming week — historically, Jackson Hole speeches have moved the S&P 500 by several percentage points in a single session, and Warsh's relative lack of established market vocabulary as a new chair adds extra uncertainty.",
+    interp:"Warsh's emphasis on 'process' over data specifics in recent communications, combined with a genuinely divided FOMC (three hawkish dissents in July), suggests markets should expect a speech heavier on framework philosophy than concrete forward guidance — a departure from the Powell-era playbook that could itself become a source of volatility."
+  },
+  {
+    headline:"Walmart Shares Tumble 9% Despite Earnings Beat on Consumer 'Trade-Offs'",
+    source:"CNBC", timestamp:"20 Aug 2026",
+    url:"https://www.cnbc.com/2026/08/19/stock-market-today-live-updates.html",
+    region:"US Domestic Economy",
+    summary:"Walmart shares fell over 9% even after reporting stronger-than-expected earnings, as the retailer flagged slowing US sales growth and said customers are making 'trade-offs' in their spending due to elevated gas prices.",
+    why:"Walmart is widely viewed as a bellwether for lower- and middle-income US consumer health; a warning about spending trade-offs from the country's largest retailer is a meaningful signal about real household budget pressure from energy costs.",
+    interp:"The market's reaction — punishing an earnings beat over forward guidance — shows investors are more focused on consumer resilience than backward-looking results right now. This ties directly back to the Iran-driven oil price story: higher gas prices are functioning as a de facto tax on discretionary consumer spending."
+  },
+  {
+    headline:"5.9-Magnitude Earthquake Strikes Japan, Injuring at Least 37",
+    source:"Euronews", timestamp:"23 Aug 2026",
+    url:"https://www.euronews.com/",
+    region:"Japan",
+    summary:"A 5.9-magnitude earthquake struck Japan, injuring at least 37 people, according to Euronews' latest news roundup, adding to a week already marked by extreme weather including wildfires, floods, and storms across parts of Europe and elsewhere.",
+    why:"Japan's economy is already navigating historically high government bond yields; a significant natural disaster adds potential fiscal and infrastructure strain to an economy already under stress from the global sovereign-debt repricing story.",
+    interp:"While casualty figures suggest this event is moderate in scale, any disruption to Japanese industrial or logistics infrastructure carries outsized global supply-chain relevance given Japan's role in semiconductors, autos, and precision manufacturing — worth monitoring for follow-on economic impact assessments."
+  },
+  {
+    headline:"China Rebuffs US Pressure to Cut Iran Energy Ties Ahead of Sanctions",
+    source:"NBC News", timestamp:"22 Aug 2026",
+    url:"https://www.nbcnews.com/world/iran/us-iran-keep-hostile-rhetoric-ahead-new-sanctions-rcna593870",
+    region:"China / US / Iran",
+    summary:"As the US and Iran exchanged defiant rhetoric ahead of Monday's sanctions announcement, China has continued to reject Washington's pressure campaign, with Bessent noting China draws roughly half its energy from inside the Gulf and urging Beijing to 'get with the program.'",
+    why:"China's cooperation or resistance is arguably the single biggest variable determining whether the new sanctions meaningfully isolate Iran's economy or simply become another unenforced item in a five-decade sanctions history.",
+    interp:"Beijing has strong structural incentives to resist — cheap, discounted Iranian crude is a genuine strategic asset for China's energy security and industrial competitiveness. Expect China to continue quiet non-compliance rather than open confrontation, testing how far the US is willing to go with secondary sanctions against Chinese entities specifically."
+  },
+];
+
+/* ---------------- MARKET UPDATES DATA ---------------- */
+const mktItems = [
+  {
+    headline:"Wall Street Ends Volatile Week on a High Note",
+    source:"CNBC", timestamp:"21 Aug 2026, close",
+    url:"https://www.cnbc.com/2026/08/20/stock-market-today-live-updates.html",
+    assetTag:"Equities",
+    summary:"The S&P 500 rose 0.43% to close Friday at 7,674.37, the Nasdaq Composite gained 0.43% to 26,180.45, and the Dow Jones Industrial Average added 517.80 points (+0.98%) to 53,277.01, as investors found their footing following a steep mid-week sell-off driven by rising Treasury yields.",
+    why:"The rebound capped a genuinely volatile week that included a nearly 700-point Dow decline on Thursday, showing how sensitive equities remain to bond-market swings even amid otherwise resilient corporate earnings.",
+    interp:"Healthcare stocks (Merck, Johnson & Johnson) and crypto-linked names (Robinhood, Coinbase) led Friday's gains — a signal that both defensive sectors and risk-on speculative plays rallied together, an unusual combination that reflects the dollar-weakness dynamic lifting nearly everything at once rather than a coherent single narrative."
+  },
+  {
+    headline:"Dow Sheds 700 Points as Treasury Rally Fades, Yields Rebound",
+    source:"CNBC", timestamp:"20 Aug 2026, close",
+    url:"https://www.cnbc.com/2026/08/19/stock-market-today-live-updates.html",
+    assetTag:"Equities",
+    summary:"The Dow fell 703.84 points (-1.32%) to 52,759.21, the S&P 500 dropped 0.87% to 7,641.16, and the Nasdaq declined 1% to 26,067.17 on Thursday, as Treasury yields resumed climbing despite the government's debt buyback operation, and Trump vowed to escalate economic pressure on Iran.",
+    why:"This single session captured the core tension of the week: a policy intervention meant to calm bond markets proved short-lived, showing the limits of buybacks alone to offset genuine fiscal and geopolitical risk premiums.",
+    interp:"The VIX jumped 7.5% to 16.01 the same day — a clear volatility spike — but the swift Friday recovery suggests markets are currently trading this as a series of manageable shocks rather than the start of a sustained downtrend. That read will be tested hard by Monday's Iran sanctions announcement."
+  },
+  {
+    headline:"Walmart Shares Fall 9% Despite Earnings Beat, Signaling Consumer Strain",
+    source:"CNBC / Yahoo Finance", timestamp:"20 Aug 2026",
+    url:"https://www.cnbc.com/2026/08/19/stock-market-today-live-updates.html",
+    assetTag:"Equities",
+    summary:"Walmart shares fell over 9% to close around $103.84 even after beating earnings estimates, as the retailer cited slowing US sales growth and consumers making spending 'trade-offs' due to elevated gas prices.",
+    why:"As the largest US retailer, Walmart's commentary on consumer behavior is one of the most closely watched real-time indicators of household financial health, particularly for lower- and middle-income shoppers most exposed to gas price increases.",
+    interp:"This is a direct transmission channel from the Iran/oil story to Main Street: higher energy costs are already showing up as reduced discretionary spending at the country's largest retailer, well before any effects from Monday's new sanctions are even priced in."
+  },
+  {
+    headline:"Treasury Doubles Long-Bond Buyback Size to At Least $4 Billion Per Operation",
+    source:"TheStreet", timestamp:"21 Aug 2026",
+    url:"https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-aug-21-2026",
+    assetTag:"Rates",
+    summary:"Treasury Secretary Scott Bessent confirmed the department has doubled the size of its long-term debt buybacks from $2 billion to at least $4 billion per operation, alongside discussion of currency interventions involving the yen and peso and new fiscal consolidation plans.",
+    why:"This is now the second consecutive week of escalating Treasury intervention in the bond market — a structural shift in how the government is managing yield pressure that extends well beyond a one-time emergency measure.",
+    interp:"The scale increase (doubling an already-doubled program) suggests the Treasury sees this as an ongoing tool rather than a temporary fix. The mention of currency intervention alongside bond buybacks hints at a more comprehensive market-stabilization strategy taking shape — worth watching for how far this expands."
+  },
+  {
+    headline:"Gold Tops $4,500, Notches Third Straight Weekly Gain",
+    source:"TradingEconomics", timestamp:"21 Aug 2026",
+    url:"https://tradingeconomics.com/commodity/gold",
+    assetTag:"Commodities",
+    summary:"Gold traded above $4,500 an ounce on Friday, on course for a third consecutive weekly gain, as investors turned to safe-haven metals amid volatility across currency and bond markets, while rising oil prices continued to underscore inflationary risks.",
+    why:"Gold's rally alongside a weaker dollar and rising equities is a somewhat unusual combination — typically gold and risk assets move in opposite directions — signaling investors are hedging inflation risk even while participating in the broader rally.",
+    interp:"The metal jumped over 4% on Wednesday alone after the Treasury's buyback announcement, showing gold is currently trading more on dollar-liquidity dynamics than on classic safe-haven fear. If the Iran sanctions escalate meaningfully, expect gold to decouple further upward as a genuine crisis hedge rather than a liquidity play."
+  },
+  {
+    headline:"Bitcoin Tops $78,000 in Strongest Weekly Run Since 2024",
+    source:"CNBC", timestamp:"21 Aug 2026",
+    url:"https://www.cnbc.com/2026/08/21/bitcoin-gain-cryptocurrency-investors-optimistic.html",
+    assetTag:"Crypto",
+    summary:"Bitcoin closed with a 22% weekly gain on Friday, ending the day near $78,335, up from about $62,800 at the start of the week, driven by a White House meeting with crypto executives, progress on the Clarity Act, and a weaker dollar following Treasury intervention.",
+    why:"A 22% weekly move in the largest cryptocurrency is a major risk-appetite signal, and the regulatory tailwind (Clarity Act progress, SEC framework proposals) suggests this rally has policy substance behind it, not just technical momentum.",
+    interp:"Bitcoin remains well below its 2026 high of roughly $94,820 and its all-time high near $126,000, meaning this is a recovery rally rather than a fresh breakout into uncharted territory. The key test is whether the Clarity Act actually clears the Senate — analysts still see the odds as 'relatively slim' despite the White House push."
+  },
+  {
+    headline:"Ether, XRP Rally Broadly in Risk-On Crypto Session",
+    source:"The Rio Times", timestamp:"21\u201322 Aug 2026",
+    url:"https://www.riotimesonline.com/crypto-markets-bitcoin-majors-saturday-august-22-2026/",
+    assetTag:"Crypto",
+    summary:"Ethereum rose 8.12% to roughly $2,515 and XRP surged 14.61% to about $1.45, confirming the crypto rally was broad-based rather than a single-token short squeeze, with Solana adding a more modest 6.87%.",
+    why:"Breadth across major tokens (rather than concentration in bitcoin alone) is generally read as a healthier signal of genuine capital inflow rather than a mechanical liquidation-driven spike in a single asset.",
+    interp:"Ethereum outpacing Bitcoin's percentage gain is notable — this is atypical in a pure risk-on session and points to demand from funds that had been underweight the second-largest token specifically, rather than simply broad index-style crypto buying."
+  },
+  {
+    headline:"Crypto-Adjacent Stocks Rally: Robinhood +14%, Coinbase +8%",
+    source:"CNBC", timestamp:"21 Aug 2026",
+    url:"https://www.cnbc.com/2026/08/20/stock-market-today-live-updates.html",
+    assetTag:"Equities",
+    summary:"Crypto-related equities saw sizable gains Friday alongside the broader bitcoin rally, with Robinhood shares jumping almost 14% and Coinbase adding 8%, as financials broadly outperformed the rest of the market.",
+    why:"Traditional equity markets rewarding crypto-exposure stocks directly shows how mainstream and integrated digital-asset sentiment has become with broader market risk appetite, not a separate, isolated asset class anymore.",
+    interp:"This kind of correlated move between crypto-native tokens and their publicly traded equity proxies suggests institutional and retail investors are treating the current rally as a genuine risk-on regime shift rather than a crypto-specific event — reinforcing the 'liquidity beats geopolitics' read on the broader market."
+  },
+  {
+    headline:"Standard Chartered Forecasts Bitcoin to $100,000 by Year-End",
+    source:"Standard Chartered (via Polymarket market coverage)", timestamp:"20 Aug 2026",
+    url:"https://polymarket.com/event/what-price-will-bitcoin-hit-in-august-2026",
+    assetTag:"Crypto",
+    summary:"Standard Chartered forecast Bitcoin could reach $100,000 by the end of 2026, citing President Trump's meeting with crypto executives and administration support for a US crypto strategic reserve as positive signals bolstering investor sentiment.",
+    why:"A major bank forecast at this level, if it materializes, would represent roughly 28% further upside from Friday's close — a bullish institutional signal that could itself become a self-fulfilling narrative if it drives additional inflows.",
+    interp:"Bank price targets in crypto markets often function partly as sentiment-shaping tools rather than pure quantitative forecasts. Worth treating as one data point among many rather than a reliable prediction — but it does reflect genuine institutional repositioning happening in the space right now."
+  },
+  {
+    headline:"Oil Holds Near Multi-Week Highs Ahead of Iran Sanctions Rollout",
+    source:"TradingEconomics", timestamp:"21 Aug 2026",
+    url:"https://tradingeconomics.com/commodity/brent-crude-oil",
+    assetTag:"Commodities",
+    summary:"Brent crude traded near $94 a barrel, heading for a second consecutive weekly gain of around 6%, supported by expectations of further US pressure on Iran even as Iranian President Pezeshkian signaled some interest in concluding the war 'while in a position of strength.'",
+    why:"Sustained oil prices in the low-to-mid $90s are now a persistent input cost pressure across the global economy, directly feeding into the Walmart consumer-strain story and the broader inflation debate the Fed faces at Jackson Hole.",
+    interp:"The US military's disclosure that it has helped move over 660 million barrels through Hormuz since May — despite the nominal blockade — is an important reality check: substantial oil volumes continue flowing even amid maximalist rhetoric from both sides, tempering the tail-risk scenario of a genuine total supply shock."
+  },
+  {
+    headline:"US-Canada Tariffs Take Effect on ~$20 Billion of Canadian Goods",
+    source:"ABC News / CBS News", timestamp:"22 Aug 2026",
+    url:"https://abcnews.com/Business/trumps-proposed-tariffs-canada-hurtle-deadline-amid-trade/story?id=135833861",
+    assetTag:"Trade Policy",
+    summary:"New 50% US tariffs on Canadian goods took effect after trade talks collapsed, covering roughly $20 billion in imports — about 5% of total Canadian exports to the US — with exemptions for major categories including oil, gas, and potash.",
+    why:"While the direct dollar value is limited relative to the overall US-Canada trade relationship, the tariffs' reintroduction after a near-deal signals renewed uncertainty for cross-border manufacturing and retail supply chains ahead of the September 8 Canadian retaliation date.",
+    interp:"The exemption of oil, gas, and potash from the tariffs is telling — Washington appears to be deliberately avoiding actions that would further stoke energy price inflation while the Iran situation is already pushing oil higher, suggesting some degree of coordinated economic-policy awareness even amid the trade dispute."
+  },
+  {
+    headline:"Jackson Hole Set to Collide With Nvidia Earnings Within 36 Hours",
+    source:"Archyde", timestamp:"22 Aug 2026",
+    url:"https://www.archyde.com/fed-chair-kevin-warsh-to-deliver-first-jackson-hole-speech-at-2026-symposium/",
+    assetTag:"Macro Calendar",
+    summary:"Fed Chair Kevin Warsh's August 28 Jackson Hole keynote lands less than 36 hours after Nvidia reports quarterly earnings on the evening of August 26, with July PCE and August CPI data also landing in the same window before the September 16 FOMC decision.",
+    why:"This is an unusually dense catalyst cluster — AI-sector earnings, inflation data, and a pivotal Fed speech from a still-unproven chair all within days of each other — creating potential for significant, compounding market volatility.",
+    interp:"The proximity of these events means market reactions could compound rather than net out — a weak Nvidia print combined with a hawkish Warsh speech would be a materially worse outcome for risk assets than either event in isolation. Position sizing into this window deserves extra scrutiny given the stacked catalyst risk."
+  },
+  {
+    headline:"VIX Eases to 15.39 as Bond Volatility Cools Into the Week",
+    source:"Yahoo Finance / market data", timestamp:"24 Aug 2026",
+    url:"https://finance.yahoo.com/quote/DX-Y.NYB/history/",
+    assetTag:"Volatility",
+    summary:"The CBOE Volatility Index eased to 15.39 (-2.84%) as Monday trading opened, down from a peak above 16 earlier in the week, alongside a Dollar Index reading near 98.97 (-0.69%) and a Russell 2000 gain of 0.82%.",
+    why:"A cooling VIX alongside a weakening dollar and broad index gains supports the 'liquidity-driven risk-on' read for the current market regime, though the level remains elevated relative to the calmer mid-teens readings seen earlier in the summer.",
+    interp:"This is a fragile calm rather than genuine complacency — VIX in the mid-teens with major scheduled catalysts (Iran sanctions today, Jackson Hole and Nvidia later this week) still ahead suggests options markets are pricing a lull rather than an all-clear signal."
+  },
+  {
+    headline:"Russell 2000 Underperforms Broader Market Rally",
+    source:"TheStreet", timestamp:"21 Aug 2026",
+    url:"https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-aug-21-2026",
+    assetTag:"Equities",
+    summary:"The Russell 2000 small-cap index lost 1.34% in early Friday trading even as the S&P 500, Dow, and Nasdaq all posted gains of roughly 0.4-0.5%, a notable divergence from the broader market's recovery.",
+    why:"Small-cap underperformance during a large-cap rally often signals underlying concerns about credit conditions and domestic economic resilience that aren't yet showing up in headline index levels dominated by mega-cap names.",
+    interp:"This divergence is worth tracking as a leading indicator — if the current rally is genuinely broad-based liquidity-driven, small caps should eventually participate given their higher sensitivity to domestic rate conditions. Continued lagging would suggest the rally is narrower and more fragile than headline index gains imply."
+  },
+  {
+    headline:"Ten-Year Treasury Yield Regains 4.70% Level as Buyback Effects Fade",
+    source:"CoinDesk", timestamp:"20 Aug 2026",
+    url:"https://www.coindesk.com/tech/2026/08/20/live-updates-bitcoin-etfs-draw-usd517-million-ether-pulls-usd189-million-in-biggest-inflows-in-months",
+    assetTag:"Rates",
+    summary:"The 10-year Treasury yield climbed back to around 4.70%, regaining ground lost after the Treasury's initial buyback announcement, while the 2-year yield — which had dipped to 4.12% — climbed back to 4.195%.",
+    why:"The yield's round-trip back toward its pre-intervention level within days shows the limits of a single policy announcement to durably reset market pricing absent a change in the underlying fiscal and inflation fundamentals.",
+    interp:"This pattern — sharp yield relief on intervention news, followed by partial reversal within days — is likely to repeat unless the Treasury escalates the scale of intervention further or the Fed signals a genuine policy shift at Jackson Hole. Watch the spread between short and long yields for signs of whether markets are pricing a durable fiscal risk premium or just short-term technical noise."
+  },
+];
+
+/* ---------------- Render ---------------- */
+document.getElementById('geoList').innerHTML = geoItems.map((it,i)=>cardHTML(i+1, it, 'geo')).join('');
+document.getElementById('mktList').innerHTML = mktItems.map((it,i)=>cardHTML(i+1, it, 'mkt')).join('');
+
+/* ---------------- Snapshot table ---------------- */
+const idxRows = [
+  ['S&P 500 (Mon session)','7,712.49','<span style="color:#21c486">+0.27%</span>'],
+  ['Nasdaq Composite (Mon session)','26,237.89','<span style="color:#ff5470">-0.20%</span>'],
+  ['Dow Jones Industrial (Mon session)','53,520.71','<span style="color:#21c486">+0.33%</span>'],
+  ['Russell 2000 (Mon session)','3,042.60','<span style="color:#21c486">+0.82%</span>'],
+  ['Brent Crude (Fri close)','$94.39','<span style="color:#21c486">+0.65%</span>'],
+  ['WTI Crude (Sat)','$86.20','<span style="color:#f2a93b">flat/up</span>'],
+  ['Gold (Fri)','$4,500+','<span style="color:#21c486">3rd wk gain</span>'],
+  ['Bitcoin (Fri close)','$78,335','<span style="color:#21c486">+22% (wk)</span>'],
+  ['US Dollar Index (Mon session)','98.97','<span style="color:#ff5470">-0.69%</span>'],
+  ['US 10Y Treasury','~4.70%','<span style="color:#f2a93b">regained</span>'],
+  ['VIX (Mon session)','15.39','<span style="color:#21c486">-2.84%</span>'],
+];
+document.getElementById('idxTable').innerHTML = idxRows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+</script>
+</body>
+</html>
