@@ -1,474 +1,432 @@
 <title>Market Pulse</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
-    --bg:#F4F6FA;
-    --surface:#FFFFFF;
-    --surface-alt:#EAEEF5;
-    --border:#D9E0EA;
-    --text:#101826;
-    --text-muted:#54637C;
-    --text-faint:#8493AC;
-    --accent:#93701E;
-    --accent-strong:#7A5C16;
-    --accent-soft:#F3E7C9;
-    --pos:#1E7A4C;
-    --pos-soft:#E2F2E9;
-    --neg:#B0281F;
-    --neg-soft:#FBE7E5;
-    --warn:#9C5B00;
-    --warn-soft:#FBEBD3;
-    --focus:#2F5FD6;
-    --shadow:0 1px 2px rgba(16,24,38,.06), 0 10px 28px -14px rgba(16,24,38,.22);
+    --paper:#f3f5f4;
+    --paper-raised:#ffffff;
+    --ink:#171d27;
+    --ink-soft:#4b5563;
+    --ink-faint:#7a8290;
+    --hairline:rgba(23,29,39,0.12);
+    --accent:#a8752c;
+    --accent-strong:#7c5620;
+    --accent-wash:rgba(168,117,44,0.10);
+    --up:#1f7a4d;
+    --down:#b3312c;
+    --flag:#96690f;
+    --up-wash:rgba(31,122,77,0.10);
+    --down-wash:rgba(179,49,44,0.10);
+    --flag-wash:rgba(150,105,15,0.12);
+    --shadow:0 1px 2px rgba(23,29,39,.05), 0 10px 26px -16px rgba(23,29,39,.25);
+    --masthead-bg:#161b24;
+    --masthead-fg:#f2ede2;
+    --masthead-accent:#d1a054;
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg:#0A1220;
-      --surface:#111C31;
-      --surface-alt:#16233F;
-      --border:#293552;
-      --text:#E7ECF6;
-      --text-muted:#A7B4CB;
-      --text-faint:#71809B;
-      --accent:#DCB65E;
-      --accent-strong:#EAC878;
-      --accent-soft:#2C2413;
-      --pos:#55CC90;
-      --pos-soft:#0F2B1F;
-      --neg:#F1897E;
-      --neg-soft:#361613;
-      --warn:#F0B958;
-      --warn-soft:#332405;
-      --focus:#7DA2FF;
-      --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -14px rgba(0,0,0,.7);
+      --paper:#0f1319;
+      --paper-raised:#161c25;
+      --ink:#e9e6de;
+      --ink-soft:#a9b0ba;
+      --ink-faint:#6d7684;
+      --hairline:rgba(233,230,222,0.13);
+      --accent:#d1a054;
+      --accent-strong:#e6bb6c;
+      --accent-wash:rgba(209,160,84,0.12);
+      --up:#57b787;
+      --down:#e2695f;
+      --flag:#e0b84f;
+      --up-wash:rgba(87,183,135,0.12);
+      --down-wash:rgba(226,105,95,0.12);
+      --flag-wash:rgba(224,184,79,0.12);
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -16px rgba(0,0,0,.65);
       color-scheme: dark;
     }
   }
   :root[data-theme="dark"]{
-    --bg:#0A1220;
-    --surface:#111C31;
-    --surface-alt:#16233F;
-    --border:#293552;
-    --text:#E7ECF6;
-    --text-muted:#A7B4CB;
-    --text-faint:#71809B;
-    --accent:#DCB65E;
-    --accent-strong:#EAC878;
-    --accent-soft:#2C2413;
-    --pos:#55CC90;
-    --pos-soft:#0F2B1F;
-    --neg:#F1897E;
-    --neg-soft:#361613;
-    --warn:#F0B958;
-    --warn-soft:#332405;
-    --focus:#7DA2FF;
-    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -14px rgba(0,0,0,.7);
+    --paper:#0f1319;
+    --paper-raised:#161c25;
+    --ink:#e9e6de;
+    --ink-soft:#a9b0ba;
+    --ink-faint:#6d7684;
+    --hairline:rgba(233,230,222,0.13);
+    --accent:#d1a054;
+    --accent-strong:#e6bb6c;
+    --accent-wash:rgba(209,160,84,0.12);
+    --up:#57b787;
+    --down:#e2695f;
+    --flag:#e0b84f;
+    --up-wash:rgba(87,183,135,0.12);
+    --down-wash:rgba(226,105,95,0.12);
+    --flag-wash:rgba(224,184,79,0.12);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -16px rgba(0,0,0,.65);
     color-scheme: dark;
   }
 
   *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
   body{
     margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:"IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Public Sans", ui-sans-serif, system-ui, sans-serif;
     font-size:15px;
-    line-height:1.5;
+    line-height:1.55;
     -webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3,h4{
-    font-family:"Source Serif 4", Georgia, serif;
-    font-weight:600;
-    text-wrap:balance;
-    margin:0;
-    color:var(--text);
-  }
-  .mono, .tabular, td.num, th.num{
-    font-family:"IBM Plex Mono", ui-monospace, "SF Mono", monospace;
-    font-variant-numeric:tabular-nums;
-  }
-  a{ color:var(--focus); }
-  ::selection{ background:var(--accent-soft); }
+  h1,h2,h3{ font-family:"Fraunces", Georgia, serif; margin:0; text-wrap:balance; }
+  .mono{ font-family:"IBM Plex Mono", ui-monospace, "SF Mono", monospace; }
+  .tnum{ font-variant-numeric:tabular-nums; }
+  a{ color:var(--accent-strong); }
+  ::selection{ background:var(--accent-wash); }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
-  /* ---------- Shell ---------- */
-  .shell{ max-width:1180px; margin:0 auto; padding:28px 24px 80px; }
-
+  /* ============ Back link ============ */
   .back-link{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    font-family:"IBM Plex Sans", sans-serif;
-    font-size:13px;
-    font-weight:600;
-    color:var(--text-muted);
-    text-decoration:none;
-    padding:8px 14px;
-    border:1px solid var(--border);
-    border-radius:9px;
-    background:var(--surface);
-    box-shadow:var(--shadow);
-    margin-bottom:18px;
-    transition:color .15s ease, border-color .15s ease;
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:12.5px; font-weight:600; letter-spacing:.02em;
+    color:var(--masthead-fg); text-decoration:none; opacity:.82;
+    padding:6px 0;
   }
-  .back-link:hover{ color:var(--text); border-color:var(--accent); }
-  .back-link svg{ flex:none; }
+  .back-link:hover{ opacity:1; color:var(--masthead-accent); }
 
-  .masthead{
-    display:flex;
-    flex-wrap:wrap;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:20px;
-    padding-bottom:22px;
-    margin-bottom:22px;
-    border-bottom:2px solid var(--border);
+  /* ============ Masthead (fixed band, theme-independent) ============ */
+  .masthead-band{
+    background:var(--masthead-bg);
+    color:var(--masthead-fg);
   }
-  .masthead-id{ display:flex; flex-direction:column; gap:6px; }
+  .masthead-inner{
+    max-width:1180px; margin:0 auto; padding:20px 24px 26px;
+  }
+  .masthead-topline{ display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; flex-wrap:wrap; gap:10px; }
   .eyebrow{
     font-family:"IBM Plex Mono", monospace;
-    font-size:11.5px;
-    letter-spacing:.11em;
-    text-transform:uppercase;
-    color:var(--accent);
+    font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--masthead-accent); font-weight:600;
+  }
+  .masthead-title{
+    font-size:clamp(30px,4.2vw,42px);
     font-weight:600;
+    color:var(--masthead-fg);
+    margin:10px 0 10px;
   }
-  .masthead-id h1{ font-size:clamp(26px,3.4vw,34px); }
-  .masthead-meta{ font-size:13px; color:var(--text-muted); }
-  .masthead-meta b{ color:var(--text); font-weight:600; }
+  .masthead-tagline{
+    margin:0 0 18px;
+    font-size:14.5px;
+    color:var(--masthead-fg);
+    opacity:.72;
+    max-width:520px;
+  }
+  .masthead-daterange{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    padding-top:14px;
+    border-top:1px solid rgba(242,237,226,0.16);
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+    color:var(--masthead-fg);
+    opacity:.85;
+  }
+  .masthead-daterange .sep{ opacity:.5; }
+  .masthead-daterange .flagchip{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:3px 9px; border-radius:999px;
+    background:rgba(242,237,226,0.08);
+    border:1px solid rgba(242,237,226,0.16);
+  }
+  .masthead-daterange .flagchip .dot{ width:6px; height:6px; border-radius:50%; background:var(--masthead-accent); }
 
-  .status-strip{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    align-items:center;
+  /* ============ Sticky pill tab bar + search ============ */
+  .controls-sticky{
+    position:sticky; top:0; z-index:30;
+    background:color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--hairline);
   }
-  .status-chip{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    padding:6px 11px;
-    border-radius:999px;
-    background:var(--surface-alt);
-    border:1px solid var(--border);
-    font-size:12.5px;
-    color:var(--text-muted);
-    white-space:nowrap;
+  .controls-inner{
+    max-width:1180px; margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
   }
-  .status-chip .dot{ width:7px; height:7px; border-radius:50%; flex:none; }
-  .dot.red{ background:var(--neg); }
-  .dot.amber{ background:var(--warn); }
-  .dot.blue{ background:var(--focus); }
-
-  /* ---------- Controls: tabs + search ---------- */
-  .controls{
-    position:sticky;
-    top:0;
-    z-index:20;
-    background:var(--bg);
-    padding:14px 0 16px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid var(--border);
-    margin-bottom:26px;
+  .pill-tabs{
+    display:inline-flex; gap:4px; padding:4px;
+    background:var(--paper-raised); border:1px solid var(--hairline); border-radius:999px;
+    box-shadow:var(--shadow);
   }
-  .tabs{
-    display:inline-flex;
-    gap:4px;
-    padding:4px;
-    background:var(--surface-alt);
-    border:1px solid var(--border);
-    border-radius:11px;
-  }
-  .tab-btn{
-    appearance:none;
-    border:none;
-    background:transparent;
-    padding:9px 16px;
-    border-radius:8px;
-    font-family:inherit;
-    font-size:13.5px;
-    font-weight:600;
-    color:var(--text-muted);
-    cursor:pointer;
+  .pill-tab{
+    appearance:none; border:none; background:transparent; cursor:pointer;
+    font-family:"Public Sans", sans-serif; font-size:13.5px; font-weight:600;
+    color:var(--ink-soft); padding:9px 18px; border-radius:999px;
     transition:background .15s ease, color .15s ease;
   }
-  .tab-btn:hover{ color:var(--text); }
-  .tab-btn.active{
-    background:var(--surface);
-    color:var(--text);
+  .pill-tab:hover{ color:var(--ink); }
+  .pill-tab.active{ background:var(--ink); color:var(--paper-raised); }
+
+  .search-box{ position:relative; flex:1 1 240px; max-width:340px; }
+  .search-box svg{ position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--ink-faint); pointer-events:none; }
+  .search-box input{
+    width:100%; font-family:"Public Sans", sans-serif; font-size:13.5px;
+    padding:10px 34px; border-radius:999px; border:1px solid var(--hairline);
+    background:var(--paper-raised); color:var(--ink);
+  }
+  .search-box input::placeholder{ color:var(--ink-faint); }
+  .search-clear{
+    position:absolute; right:8px; top:50%; transform:translateY(-50%);
+    border:none; background:transparent; color:var(--ink-faint); cursor:pointer;
+    padding:5px; border-radius:6px; line-height:0; font-size:16px;
+  }
+  .search-clear:hover{ color:var(--ink); }
+  .search-count{
+    max-width:1180px; margin:6px auto 0; padding:0 24px;
+    font-family:"IBM Plex Mono", monospace; font-size:11px; color:var(--ink-faint);
+  }
+
+  /* ============ Shell ============ */
+  .shell{ max-width:1180px; margin:0 auto; padding:28px 24px 80px; }
+  .tab-panel[hidden]{ display:none; }
+
+  /* ============ Stat strip ============ */
+  .stat-strip-wrap{ margin-bottom:34px; }
+  .stat-strip-label{
+    font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ink-faint); margin-bottom:10px; font-weight:600;
+  }
+  .stat-strip{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(128px,1fr)); gap:1px;
+    background:var(--hairline); border:1px solid var(--hairline); border-radius:12px; overflow:hidden;
     box-shadow:var(--shadow);
   }
-  .tab-btn:focus-visible, .search-box input:focus-visible, button:focus-visible, .toggle-theme:focus-visible{
-    outline:2px solid var(--focus);
-    outline-offset:2px;
-  }
+  .stat-tile{ background:var(--paper-raised); padding:14px 16px; display:flex; flex-direction:column; gap:6px; }
+  .stat-tile .tlabel{ font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-faint); font-weight:600; }
+  .stat-tile .tvalue{ font-family:"IBM Plex Mono",monospace; font-size:19px; font-weight:600; color:var(--ink); }
+  .stat-tile .tdelta{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:600; display:inline-flex; align-items:center; gap:3px; width:fit-content; }
+  .stat-tile .tdelta.up{ color:var(--up); } .stat-tile .tdelta.down{ color:var(--down); } .stat-tile .tdelta.flag{ color:var(--flag); }
 
-  .search-box{
-    position:relative;
-    flex:1 1 260px;
-    max-width:380px;
-  }
-  .search-box svg{
-    position:absolute; left:12px; top:50%; transform:translateY(-50%);
-    color:var(--text-faint); pointer-events:none;
-  }
-  .search-box input{
-    width:100%;
-    font-family:inherit;
-    font-size:13.5px;
-    padding:10px 34px 10px 34px;
-    border-radius:9px;
-    border:1px solid var(--border);
-    background:var(--surface);
-    color:var(--text);
-  }
-  .search-box input::placeholder{ color:var(--text-faint); }
-  .search-clear{
-    position:absolute; right:6px; top:50%; transform:translateY(-50%);
-    border:none; background:transparent; color:var(--text-faint);
-    cursor:pointer; padding:6px; border-radius:6px; line-height:0;
-  }
-  .search-clear:hover{ color:var(--text); background:var(--surface-alt); }
-  .search-count{
-    font-size:11.5px; color:var(--text-faint); margin-top:6px; padding-left:2px;
-    font-family:"IBM Plex Mono",monospace;
-  }
+  /* ============ Section headers ============ */
+  .region-section{ margin-bottom:38px; }
+  .region-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--hairline); }
+  .region-head h2{ font-size:19px; font-weight:600; }
+  .region-head .region-idx{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--accent); font-weight:600; }
+  .region-head .region-note{ margin-left:auto; font-size:12.5px; color:var(--ink-faint); }
+  .deep-sub{ font-size:13px; color:var(--ink-faint); margin:0 0 16px; }
 
-  /* ---------- Section scaffolding ---------- */
-  .tab-panel[hidden]{ display:none; }
-  .region-section{ margin-bottom:40px; }
-  .region-head{
-    display:flex;
-    align-items:baseline;
-    gap:12px;
-    margin-bottom:16px;
-    padding-bottom:10px;
-    border-bottom:1px solid var(--border);
+  /* ============ Numbered dispatch cards ============ */
+  .dispatch-list{ display:grid; grid-template-columns:repeat(auto-fit, minmax(430px,1fr)); gap:16px; align-items:start; }
+  .dispatch-list .dispatch-card:last-child:nth-child(odd){ grid-column:1 / -1; }
+  .dispatch-list .dispatch-card:last-child:nth-child(odd) .dispatch-field p{ max-width:640px; }
+  .dispatch-card{
+    background:var(--paper-raised); border:1px solid var(--hairline); border-radius:13px;
+    box-shadow:var(--shadow); padding:19px 22px 20px; display:flex; gap:14px;
   }
-  .region-num{
-    font-family:"IBM Plex Mono", monospace;
-    font-size:12px; color:var(--accent); font-weight:600;
+  .dispatch-card[hidden]{ display:none; }
+  .dispatch-rank{
+    font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:600; color:var(--accent);
+    flex:none; width:28px; padding-top:2px;
   }
-  .region-head h2{ font-size:19px; }
-  .region-note{ font-size:12.5px; color:var(--text-faint); margin-left:auto; }
+  .dispatch-body{ flex:1; min-width:0; display:flex; flex-direction:column; gap:10px; }
+  .dispatch-tag{
+    display:inline-flex; align-items:center; width:fit-content;
+    font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--accent-strong); background:var(--accent-wash); border-radius:5px; padding:3px 8px; font-weight:600;
+  }
+  .dispatch-body h3{ font-size:17.5px; font-weight:600; line-height:1.32; }
+  .dispatch-meta{
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+    font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-faint);
+  }
+  .dispatch-meta a{ color:var(--ink-faint); text-decoration:underline; text-decoration-color:var(--hairline); text-underline-offset:2px; }
+  .dispatch-meta a:hover{ color:var(--accent-strong); text-decoration-color:var(--accent); }
+  .dispatch-meta .mdot{ opacity:.5; }
+  .dispatch-field{ display:flex; flex-direction:column; gap:3px; }
+  .dispatch-field .flabel{
+    font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-faint); font-weight:600;
+  }
+  .dispatch-field p{ margin:0; color:var(--ink-soft); font-size:13.7px; }
+  .dispatch-card details{ margin-top:2px; border-top:1px solid var(--hairline); padding-top:10px; }
+  .dispatch-card summary{
+    cursor:pointer; list-style:none; display:flex; align-items:center; gap:7px;
+    font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--accent-strong); font-weight:600; user-select:none;
+  }
+  .dispatch-card summary::-webkit-details-marker{ display:none; }
+  .dispatch-card summary .chev{ transition:transform .15s ease; display:inline-flex; }
+  .dispatch-card details[open] summary .chev{ transform:rotate(90deg); }
+  .dispatch-card .interp-body{ margin-top:9px; color:var(--ink); font-size:13.6px; font-style:italic; }
+  .dispatch-card .interp-body p{ margin:0; }
 
   .no-results{
-    display:none;
-    padding:18px; text-align:center; color:var(--text-faint);
-    font-size:13px; border:1px dashed var(--border); border-radius:10px;
+    display:none; padding:18px; text-align:center; color:var(--ink-faint);
+    font-size:13px; border:1px dashed var(--hairline); border-radius:10px;
   }
 
-  /* ---------- Snapshot matrix ---------- */
-  .snapshot-wrap{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:14px;
-    box-shadow:var(--shadow);
-    padding:20px 20px 8px;
-    margin-bottom:44px;
+  /* ============ Data tables ============ */
+  .table-panel{
+    background:var(--paper-raised); border:1px solid var(--hairline); border-radius:14px;
+    box-shadow:var(--shadow); padding:20px 20px 8px; margin-bottom:40px;
   }
-  .snapshot-head{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:14px; flex-wrap:wrap;}
-  .snapshot-head h2{ font-size:19px; }
-  .snapshot-head span{ font-size:12px; color:var(--text-faint); font-family:"IBM Plex Mono",monospace; }
+  .table-panel-head{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+  .table-panel-head h2{ font-size:19px; font-weight:600; }
+  .table-panel-head span{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink-faint); }
   .table-scroll{ overflow-x:auto; margin:0 -20px; padding:0 20px 14px; }
-  table.matrix{ width:100%; border-collapse:collapse; min-width:820px; }
-  table.matrix th{
-    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
-    color:var(--text-faint); font-weight:600; padding:8px 12px 10px; border-bottom:1px solid var(--border);
-    white-space:nowrap;
+  table{ width:100%; border-collapse:collapse; }
+  table.matrix{ min-width:860px; }
+  table.risk{ min-width:920px; }
+  th{
+    text-align:left; font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--ink-faint); font-weight:600; padding:8px 12px 10px; border-bottom:1px solid var(--hairline); white-space:nowrap;
   }
-  table.matrix td{
-    padding:12px 12px; border-bottom:1px solid var(--border); vertical-align:top; font-size:13.5px;
-  }
-  table.matrix tbody tr:hover{ background:var(--surface-alt); }
-  table.matrix tbody tr:last-child td{ border-bottom:none; }
+  th.num, td.num{ text-align:right; }
+  td{ padding:12px 12px; border-bottom:1px solid var(--hairline); vertical-align:top; font-size:13.3px; }
+  tbody tr:hover{ background:var(--accent-wash); }
+  tbody tr:last-child td{ border-bottom:none; }
   .instrument{ font-weight:600; }
-  .instrument .sub{ display:block; font-weight:400; color:var(--text-faint); font-size:11.5px; margin-top:2px; }
+  .instrument .sub{ display:block; font-weight:400; color:var(--ink-faint); font-size:11.5px; margin-top:2px; }
   .chg{ font-weight:600; white-space:nowrap; }
-  .chg.pos{ color:var(--pos); }
-  .chg.neg{ color:var(--neg); }
-  .chg.flat{ color:var(--text-muted); }
-  td.driver, td.implication{ color:var(--text-muted); max-width:230px; }
+  .chg.up{ color:var(--up); } .chg.down{ color:var(--down); } .chg.flag{ color:var(--flag); }
+  td.driver, td.implication{ color:var(--ink-soft); max-width:230px; }
+  .watch-pill{
+    display:inline-flex; align-items:center; gap:5px; padding:4px 10px; border-radius:999px;
+    font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600; white-space:nowrap;
+  }
+  .watch-pill.high{ background:var(--down-wash); color:var(--down); }
+  .watch-pill.medium{ background:var(--flag-wash); color:var(--flag); }
+  .risk-name{ color:var(--ink); font-weight:600; max-width:190px; }
 
-  /* ---------- Item cards ---------- */
-  .item-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:16px; }
-  .item-card{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:13px;
-    padding:18px 20px 20px;
-    box-shadow:var(--shadow);
-    display:flex; flex-direction:column; gap:11px;
-  }
-  .item-card[hidden]{ display:none; }
-  .item-card h3{ font-size:16.5px; line-height:1.3; }
-  .item-row{ display:flex; flex-direction:column; gap:4px; }
-  .item-label{
-    font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
-    color:var(--text-faint); font-weight:600;
-  }
-  .item-row p{ margin:0; color:var(--text-muted); font-size:13.6px; }
-  .talking-point{
-    background:var(--surface-alt);
-    border-left:3px solid var(--focus);
-    border-radius:0 8px 8px 0;
-    padding:10px 13px;
-  }
-  .talking-point .item-label{ color:var(--focus); }
-  .talking-point p{ color:var(--text); font-style:italic; font-size:13.4px; }
-
-  /* ---------- Tab 2 layout ---------- */
-  .deep-section{ margin-bottom:40px; }
+  /* ============ Tab 2 mechanic cards + notes ============ */
+  .deep-section{ margin-bottom:38px; }
   .deep-head{ display:flex; align-items:baseline; gap:10px; margin-bottom:6px; }
-  .deep-head .region-num{ color:var(--focus); }
-  .deep-head h2{ font-size:19px; }
-  .deep-sub{ font-size:13px; color:var(--text-faint); margin:0 0 16px; }
+  .deep-head .region-idx{ color:var(--accent-strong); }
+  .deep-head h2{ font-size:19px; font-weight:600; }
 
-  .mechanic-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:16px; }
+  .mechanic-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:14px; }
   .mechanic-card{
-    background:var(--surface); border:1px solid var(--border); border-radius:13px;
-    padding:17px 19px 19px; box-shadow:var(--shadow);
+    background:var(--paper-raised); border:1px solid var(--hairline); border-radius:13px;
+    padding:18px 20px 19px; box-shadow:var(--shadow); display:flex; gap:16px;
   }
   .mechanic-card[hidden]{ display:none; }
-  .mechanic-card h3{ font-size:15px; margin-bottom:8px; }
-  .mechanic-card h3 .tag{
-    display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.05em;
-    color:var(--accent); background:var(--accent-soft); border-radius:5px; padding:2px 7px; margin-right:8px;
-    vertical-align:middle; text-transform:uppercase; font-weight:600;
-  }
-  .mechanic-card p{ margin:0 0 8px; color:var(--text-muted); font-size:13.4px; }
-  .mechanic-card p:last-child{ margin-bottom:0; }
-  .mechanic-card .now{ color:var(--text); }
-  .mechanic-card .now b{ color:var(--accent-strong); font-weight:600; }
+  .mechanic-rank{ font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:600; color:var(--accent); flex:none; width:22px; }
+  .mechanic-body{ flex:1; min-width:0; }
+  .mechanic-body h3{ font-size:15.5px; font-weight:600; margin-bottom:9px; }
+  .mechanic-body .dispatch-tag{ margin-bottom:9px; }
+  .mechanic-body p{ margin:0 0 8px; color:var(--ink-soft); font-size:13.4px; }
+  .mechanic-body p:last-child{ margin-bottom:0; }
+  .mechanic-body .now b{ color:var(--accent-strong); font-weight:600; }
+  .mechanic-body .now{ color:var(--ink); }
 
   .note-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:14px; }
   .learning-note{
-    background:linear-gradient(180deg, var(--accent-soft), var(--surface) 70%);
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:16px 18px 18px;
-    position:relative;
+    background:var(--accent-wash); border:1px solid var(--hairline); border-radius:12px; padding:16px 18px 18px;
   }
   .learning-note[hidden]{ display:none; }
   .learning-note .note-kicker{
     font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
     color:var(--accent-strong); font-weight:700; display:flex; align-items:center; gap:6px; margin-bottom:8px;
   }
-  .learning-note h3{ font-size:15px; margin-bottom:7px; }
-  .learning-note p{ margin:0; color:var(--text-muted); font-size:13.3px; }
+  .learning-note h3{ font-size:15px; font-weight:600; margin-bottom:7px; }
+  .learning-note p{ margin:0; color:var(--ink-soft); font-size:13.2px; }
   .learning-note p + p{ margin-top:7px; }
 
-  .risk-wrap{
-    background:var(--surface); border:1px solid var(--border); border-radius:14px;
-    box-shadow:var(--shadow); padding:20px 20px 8px;
-  }
-  table.risk{ width:100%; border-collapse:collapse; min-width:900px; }
-  table.risk th{
-    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
-    color:var(--text-faint); font-weight:600; padding:8px 12px 10px; border-bottom:1px solid var(--border);
-    white-space:nowrap;
-  }
-  table.risk td{ padding:13px 12px; border-bottom:1px solid var(--border); vertical-align:top; font-size:13.4px; color:var(--text-muted); }
-  table.risk tbody tr:last-child td{ border-bottom:none; }
-  table.risk tbody tr:hover{ background:var(--surface-alt); }
-  table.risk td.risk-name{ color:var(--text); font-weight:600; max-width:190px; }
-  .watch-pill{
-    display:inline-flex; align-items:center; gap:5px; padding:4px 10px; border-radius:999px;
-    font-size:11.5px; font-weight:600; white-space:nowrap;
-  }
-  .watch-pill.high{ background:var(--neg-soft); color:var(--neg); }
-  .watch-pill.medium{ background:var(--warn-soft); color:var(--warn); }
-  .watch-pill.rising{ background:var(--warn-soft); color:var(--warn); }
-
   footer{
-    margin-top:50px; padding-top:20px; border-top:1px solid var(--border);
-    font-size:12px; color:var(--text-faint); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+    margin-top:50px; padding-top:20px; border-top:1px solid var(--hairline);
+    font-size:12px; color:var(--ink-faint); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
   }
 
   @media (max-width:640px){
-    .masthead{ flex-direction:column; align-items:flex-start; }
-    .controls{ flex-direction:column; align-items:stretch; }
-    .search-box{ max-width:none; }
-    .region-note{ margin-left:0; }
+    .controls-inner{ flex-direction:column; align-items:stretch; }
+    .search-box{ flex:none; max-width:none; }
+    .pill-tabs{ width:100%; }
+    .pill-tab{ flex:1; text-align:center; padding:10px 8px; font-size:12.5px; white-space:nowrap; }
+    .dispatch-list{ grid-template-columns:1fr; }
+    .dispatch-card{ gap:12px; }
+    .region-head .region-note{ margin-left:0; }
+    .masthead-daterange{ align-items:flex-start; gap:8px 10px; }
   }
 </style>
 
-<div class="shell">
-
-  <a class="back-link" href="index.html">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-    Back to Weekly Brief
-  </a>
-
-  <header class="masthead">
-    <div class="masthead-id">
-      <span class="eyebrow">Monthly Executive Market Review</span>
-      <h1>Market Pulse</h1>
-      <div class="masthead-meta">Prepared for client-facing teams &amp; associate analysts &middot; <b>September 2026 cycle</b> &middot; data as of <b>Sep 4, 2026</b></div>
+<!-- ============ Masthead ============ -->
+<div class="masthead-band">
+  <div class="masthead-inner">
+    <div class="masthead-topline">
+      <a class="back-link" href="index.html">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back to Weekly Brief
+      </a>
     </div>
-    <div class="status-strip">
-      <span class="status-chip"><span class="dot red"></span>Hormuz energy shock: active</span>
-      <span class="status-chip"><span class="dot amber"></span>Synchronized DM tightening bias</span>
-      <span class="status-chip"><span class="dot blue"></span>Next: ECB Sep 10 &middot; FOMC Sep 16&ndash;17</span>
-    </div>
-  </header>
-
-  <div class="controls">
-    <div class="tabs" role="tablist" aria-label="Dashboard sections">
-      <button class="tab-btn active" id="tabbtn-client" role="tab" aria-selected="true" aria-controls="tab-client" data-tab="client">Client Market Updates</button>
-      <button class="tab-btn" id="tabbtn-deep" role="tab" aria-selected="false" aria-controls="tab-deep" data-tab="deep">Technical Deep-Dive</button>
-    </div>
-    <div>
-      <div class="search-box">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" id="filterInput" placeholder="Filter by keyword — e.g. gold, BoJ, backwardation…" autocomplete="off" spellcheck="false">
-        <button class="search-clear" id="clearBtn" title="Clear filter" aria-label="Clear filter" hidden>&times;</button>
-      </div>
-      <div class="search-count" id="searchCount"></div>
+    <div class="eyebrow">Monthly Executive Market Review</div>
+    <h1 class="masthead-title">Market Pulse</h1>
+    <p class="masthead-tagline">Global markets, rates, and cross-asset positioning &mdash; briefed for client conversations and sharpened for the desk.</p>
+    <div class="masthead-daterange">
+      <span>September 2026 Cycle &middot; Data as of Sep 4, 2026</span>
+      <span class="flagchip"><span class="dot"></span>Hormuz energy shock active</span>
+      <span class="flagchip"><span class="dot"></span>Next: ECB Sep 10 &middot; FOMC Sep 16&ndash;17</span>
     </div>
   </div>
+</div>
+
+<!-- ============ Sticky controls ============ -->
+<div class="controls-sticky">
+  <div class="controls-inner">
+    <div class="pill-tabs" role="tablist" aria-label="Dashboard sections">
+      <button class="pill-tab active" id="tabbtn-client" role="tab" aria-selected="true" aria-controls="tab-client" data-tab="client">Client Market Updates</button>
+      <button class="pill-tab" id="tabbtn-deep" role="tab" aria-selected="false" aria-controls="tab-deep" data-tab="deep">Technical Deep-Dive</button>
+    </div>
+    <div class="search-box">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="filterInput" placeholder="Filter by keyword &mdash; gold, BoJ, backwardation&hellip;" autocomplete="off" spellcheck="false">
+      <button class="search-clear" id="clearBtn" title="Clear filter" aria-label="Clear filter" hidden>&times;</button>
+    </div>
+  </div>
+  <div class="search-count" id="searchCount"></div>
+</div>
+
+<div class="shell">
 
   <!-- ============================================================ TAB 1 -->
   <section id="tab-client" class="tab-panel" role="tabpanel" aria-labelledby="tabbtn-client">
 
-    <div class="snapshot-wrap">
-      <div class="snapshot-head">
+    <div class="stat-strip-wrap">
+      <div class="stat-strip-label">Highlight Strip &middot; Key Levels</div>
+      <div class="stat-strip">
+        <div class="stat-tile"><span class="tlabel">S&amp;P 500</span><span class="tvalue tnum">7,707</span><span class="tdelta down">&#9660; 0.2% mtd</span></div>
+        <div class="stat-tile"><span class="tlabel">Fed Funds</span><span class="tvalue tnum">3.50&ndash;3.75%</span><span class="tdelta flag">&#9679; held, 5th mtg</span></div>
+        <div class="stat-tile"><span class="tlabel">Brent Crude</span><span class="tvalue tnum">$96.79</span><span class="tdelta down">&#9660; off $98 spike</span></div>
+        <div class="stat-tile"><span class="tlabel">Gold</span><span class="tvalue tnum">$4,450</span><span class="tdelta down">&#9660; on hike odds</span></div>
+        <div class="stat-tile"><span class="tlabel">DXY</span><span class="tvalue tnum">99.0</span><span class="tdelta down">&#9660; 0.9% mtd</span></div>
+        <div class="stat-tile"><span class="tlabel">Nikkei 225</span><span class="tvalue tnum">65,238</span><span class="tdelta up">&#9650; 52% yoy</span></div>
+        <div class="stat-tile"><span class="tlabel">JGB 10Y</span><span class="tvalue tnum">3.00%</span><span class="tdelta flag">&#9679; 1996 level</span></div>
+        <div class="stat-tile"><span class="tlabel">Copper</span><span class="tvalue tnum">$6.56</span><span class="tdelta up">&#9650; 47% yoy</span></div>
+      </div>
+    </div>
+
+    <div class="table-panel">
+      <div class="table-panel-head">
         <h2>Market &amp; Economic Snapshot</h2>
         <span>15 benchmarks &middot; levels as of Sep 3&ndash;4, 2026</span>
       </div>
       <div class="table-scroll">
-        <table class="matrix" id="snapshotTable">
+        <table class="matrix">
           <thead>
-            <tr>
-              <th>Benchmark</th>
-              <th>Level</th>
-              <th>Shift</th>
-              <th>Primary Driver</th>
-              <th>Portfolio Implication</th>
-            </tr>
+            <tr><th>Benchmark</th><th class="num">Level</th><th>Shift</th><th>Primary Driver</th><th>Portfolio Implication</th></tr>
           </thead>
           <tbody>
-            <tr><td class="instrument">S&amp;P 500<span class="sub">US large-cap equity</span></td><td class="tabular">7,707</td><td class="chg neg tabular">&minus;0.2% MTD / +19% YoY</td><td class="driver">Choppy on Iran-strike oil spike and Fed hike repricing</td><td class="implication">Balance quality &amp; duration; trim the most rate-sensitive growth names</td></tr>
-            <tr><td class="instrument">Nasdaq 100<span class="sub">US mega-cap / AI-linked tech</span></td><td class="tabular">29,322</td><td class="chg neg tabular">&minus;0.6% MTD / +24% YoY</td><td class="driver">AI capex conviction vs. margin-timing questions</td><td class="implication">Stay selective in mega-cap exposure; watch capex-to-margin signals</td></tr>
-            <tr><td class="instrument">Dow Jones Industrial<span class="sub">US cyclicals / industrials</span></td><td class="tabular">53,325</td><td class="chg neg tabular">&minus;1.9% MTD / +17.5% YoY</td><td class="driver">Cyclicals hit hardest by oil-driven volatility</td><td class="implication">Favor quality cyclicals with pricing power over energy-cost swings</td></tr>
-            <tr><td class="instrument">Fed Funds Rate<span class="sub">US monetary policy</span></td><td class="tabular">3.50&ndash;3.75%</td><td class="chg flat tabular">Held, 5th meeting</td><td class="driver">Core PCE still 3.3% y/y; 3 dissents favored a hike in July</td><td class="implication">Keep duration flexible into the Sep 16&ndash;17 FOMC</td></tr>
-            <tr><td class="instrument">US 10-Year Treasury<span class="sub">Sovereign duration benchmark</span></td><td class="tabular">Volatile, easing early Sep</td><td class="chg amber tabular">Risk premium unwinding</td><td class="driver">Iran-strike shock fading vs. resilient growth data</td><td class="implication">Ladder duration rather than committing to one direction</td></tr>
-            <tr><td class="instrument">ECB Deposit Rate<span class="sub">Eurozone monetary policy</span></td><td class="tabular">2.25&ndash;2.40%</td><td class="chg amber tabular">More hikes flagged</td><td class="driver">Energy-driven inflation; PMI resilience (52.8 mfg)</td><td class="implication">Underweight rate-sensitive EU credit into the Sep 10 decision</td></tr>
-            <tr><td class="instrument">BoE Bank Rate<span class="sub">UK monetary policy</span></td><td class="tabular">3.75%</td><td class="chg flat tabular">Held, 6&ndash;3 vote</td><td class="driver">UK CPI at 2.9% y/y; energy passthrough risk</td><td class="implication">Trim gilt duration ahead of the Autumn Budget</td></tr>
-            <tr><td class="instrument">UK 10-Year Gilt<span class="sub">Sovereign duration benchmark</span></td><td class="tabular">~5.16%</td><td class="chg neg tabular">Off a 19-yr high of 5.29%</td><td class="driver">Fiscal credibility concerns pre-Budget</td><td class="implication">Treat as an event risk, not a credit-quality issue</td></tr>
-            <tr><td class="instrument">BoJ Policy Rate<span class="sub">Japan monetary policy</span></td><td class="tabular">1.00%</td><td class="chg amber tabular">Highest since 1995</td><td class="driver">Inflation persistence; JGB 10Y hit 3% (a 1996 level)</td><td class="implication">Hedge JPY exposure; watch for carry-trade unwind risk</td></tr>
-            <tr><td class="instrument">Nikkei 225<span class="sub">Japan large-cap equity</span></td><td class="tabular">65,238</td><td class="chg neg tabular">&minus;1.6% MTD / +52% YoY</td><td class="driver">Yen strength and rising yields pressuring tech names</td><td class="implication">Trim unhedged JPY equity overweight into yen strength</td></tr>
-            <tr><td class="instrument">China GDP (Q2)<span class="sub">Growth, y/y</span></td><td class="tabular">4.3%</td><td class="chg neg tabular">Slowest pace in ~4 years</td><td class="driver">Property drag; soft private investment</td><td class="implication">Stay selective in China/EM exposure; track PMI inflection</td></tr>
-            <tr><td class="instrument">USD/CNY<span class="sub">Yuan exchange rate</span></td><td class="tabular">~6.72</td><td class="chg pos tabular">+0.4% MTD / +5.7% YoY</td><td class="driver">Improving August PMI sentiment (51.5)</td><td class="implication">Watch for stimulus follow-through before adding China beta</td></tr>
-            <tr><td class="instrument">Brent Crude<span class="sub">Global oil benchmark</span></td><td class="tabular">$96.79/bbl</td><td class="chg neg tabular">Eased from a ~$98 spike</td><td class="driver">Hormuz disruption; OPEC+ unwinding output cuts</td><td class="implication">Keep an inflation hedge; avoid chasing the spike</td></tr>
-            <tr><td class="instrument">Gold<span class="sub">Safe-haven / reserve asset</span></td><td class="tabular">$4,400&ndash;4,500/oz</td><td class="chg neg tabular">Pulled back on hike bets</td><td class="driver">Strong August payrolls revived Sep hike odds (~58%)</td><td class="implication">Hold as a strategic diversifier, not a directional call</td></tr>
-            <tr><td class="instrument">Copper<span class="sub">Industrial metal, LME/COMEX</span></td><td class="tabular">$6.56/lb</td><td class="chg pos tabular">+47% YoY, steep backwardation</td><td class="driver">Chile/Congo supply loss plus US tariff stockpiling</td><td class="implication">Read the backwardation as tightness, but discount the stockpiling effect</td></tr>
+            <tr><td class="instrument">S&amp;P 500<span class="sub">US large-cap equity</span></td><td class="num tnum">7,707</td><td class="chg down tnum">&minus;0.2% mtd / +19% yoy</td><td class="driver">Choppy on Iran-strike oil spike and Fed hike repricing</td><td class="implication">Balance quality &amp; duration; trim the most rate-sensitive growth names</td></tr>
+            <tr><td class="instrument">Nasdaq 100<span class="sub">US mega-cap / AI-linked tech</span></td><td class="num tnum">29,322</td><td class="chg down tnum">&minus;0.6% mtd / +24% yoy</td><td class="driver">AI capex conviction vs. margin-timing questions</td><td class="implication">Stay selective in mega-cap exposure; watch capex-to-margin signals</td></tr>
+            <tr><td class="instrument">Dow Jones Industrial<span class="sub">US cyclicals / industrials</span></td><td class="num tnum">53,325</td><td class="chg down tnum">&minus;1.9% mtd / +17.5% yoy</td><td class="driver">Cyclicals hit hardest by oil-driven volatility</td><td class="implication">Favor quality cyclicals with pricing power over energy-cost swings</td></tr>
+            <tr><td class="instrument">Fed Funds Rate<span class="sub">US monetary policy</span></td><td class="num tnum">3.50&ndash;3.75%</td><td class="chg flag tnum">Held, 5th meeting</td><td class="driver">Core PCE still 3.3% y/y; 3 dissents favored a hike in July</td><td class="implication">Keep duration flexible into the Sep 16&ndash;17 FOMC</td></tr>
+            <tr><td class="instrument">US 10-Year Treasury<span class="sub">Sovereign duration benchmark</span></td><td class="num tnum">Volatile</td><td class="chg flag tnum">Risk premium unwinding</td><td class="driver">Iran-strike shock fading vs. resilient growth data</td><td class="implication">Ladder duration rather than committing to one direction</td></tr>
+            <tr><td class="instrument">ECB Deposit Rate<span class="sub">Eurozone monetary policy</span></td><td class="num tnum">2.25&ndash;2.40%</td><td class="chg flag tnum">More hikes flagged</td><td class="driver">Energy-driven inflation; PMI resilience (52.8 mfg)</td><td class="implication">Underweight rate-sensitive EU credit into the Sep 10 decision</td></tr>
+            <tr><td class="instrument">BoE Bank Rate<span class="sub">UK monetary policy</span></td><td class="num tnum">3.75%</td><td class="chg flag tnum">Held, 6&ndash;3 vote</td><td class="driver">UK CPI at 2.9% y/y; energy passthrough risk</td><td class="implication">Trim gilt duration ahead of the Autumn Budget</td></tr>
+            <tr><td class="instrument">UK 10-Year Gilt<span class="sub">Sovereign duration benchmark</span></td><td class="num tnum">~5.16%</td><td class="chg down tnum">Off a 19-yr high of 5.29%</td><td class="driver">Fiscal credibility concerns pre-Budget</td><td class="implication">Treat as an event risk, not a credit-quality issue</td></tr>
+            <tr><td class="instrument">BoJ Policy Rate<span class="sub">Japan monetary policy</span></td><td class="num tnum">1.00%</td><td class="chg flag tnum">Highest since 1995</td><td class="driver">Inflation persistence; JGB 10Y hit 3% (a 1996 level)</td><td class="implication">Hedge JPY exposure; watch for carry-trade unwind risk</td></tr>
+            <tr><td class="instrument">Nikkei 225<span class="sub">Japan large-cap equity</span></td><td class="num tnum">65,238</td><td class="chg down tnum">&minus;1.6% mtd / +52% yoy</td><td class="driver">Yen strength and rising yields pressuring tech names</td><td class="implication">Trim unhedged JPY equity overweight into yen strength</td></tr>
+            <tr><td class="instrument">China GDP (Q2)<span class="sub">Growth, y/y</span></td><td class="num tnum">4.3%</td><td class="chg down tnum">Slowest pace in ~4 years</td><td class="driver">Property drag; soft private investment</td><td class="implication">Stay selective in China/EM exposure; track PMI inflection</td></tr>
+            <tr><td class="instrument">USD/CNY<span class="sub">Yuan exchange rate</span></td><td class="num tnum">~6.72</td><td class="chg up tnum">+0.4% mtd / +5.7% yoy</td><td class="driver">Improving August PMI sentiment (51.5)</td><td class="implication">Watch for stimulus follow-through before adding China beta</td></tr>
+            <tr><td class="instrument">Brent Crude<span class="sub">Global oil benchmark</span></td><td class="num tnum">$96.79/bbl</td><td class="chg down tnum">Eased from a ~$98 spike</td><td class="driver">Hormuz disruption; OPEC+ unwinding output cuts</td><td class="implication">Keep an inflation hedge; avoid chasing the spike</td></tr>
+            <tr><td class="instrument">Gold<span class="sub">Safe-haven / reserve asset</span></td><td class="num tnum">$4,400&ndash;4,500/oz</td><td class="chg down tnum">Pulled back on hike bets</td><td class="driver">Strong August payrolls revived Sep hike odds (~58%)</td><td class="implication">Hold as a strategic diversifier, not a directional call</td></tr>
+            <tr><td class="instrument">Copper<span class="sub">Industrial metal, LME/COMEX</span></td><td class="num tnum">$6.56/lb</td><td class="chg up tnum">+47% yoy, steep backwardation</td><td class="driver">Chile/Congo supply loss plus US tariff stockpiling</td><td class="implication">Read the backwardation as tightness, but discount the stockpiling effect</td></tr>
           </tbody>
         </table>
       </div>
@@ -476,101 +434,189 @@
 
     <!-- Region 1 -->
     <div class="region-section">
-      <div class="region-head"><span class="region-num">01</span><h2>US Equities &amp; Economy</h2><span class="region-note">Fed policy &middot; earnings &middot; labor</span></div>
-      <div class="item-grid">
-        <article class="item-card">
-          <h3>Fed Holds at 3.50&ndash;3.75% as Hawks Gain Ground</h3>
-          <div class="item-row"><span class="item-label">Key takeaway</span><p>A fifth consecutive hold masks growing hawkish dissent: three officials favored a hike in July, and August&rsquo;s blowout payrolls report (+162,000 vs. ~53,000 expected) reignited September hike odds to roughly 58%.</p></div>
-          <div class="item-row"><span class="item-label">Market / sector impact</span><p>Rate-sensitive equities &mdash; growth and long-duration tech &mdash; are most exposed to a repricing; front-end Treasury yields likely stay elevated into the Sep 16&ndash;17 FOMC.</p></div>
-          <div class="talking-point"><span class="item-label">Client talking point</span><p>&ldquo;Clients keep asking when rates are coming down. The honest answer right now is: probably not next. Core PCE is still running at 3.3%, hotter than the 2.5% core CPI print, and the labor market just surprised to the upside. We're managing for a Fed that may need one more hike, not one that's about to cut.&rdquo;</p></div>
+      <div class="region-head"><span class="region-idx">01</span><h2>US Equities &amp; Economy</h2><span class="region-note">Fed policy &middot; earnings &middot; labor</span></div>
+      <div class="dispatch-list">
+        <article class="dispatch-card">
+          <span class="dispatch-rank mono tnum">01</span>
+          <div class="dispatch-body">
+            <span class="dispatch-tag">US Equities &amp; Economy</span>
+            <h3>Fed Holds at 3.50&ndash;3.75% as Hawks Gain Ground</h3>
+            <div class="dispatch-meta"><span>CNBC</span><span class="mdot">&middot;</span><span>Sep 4, 2026</span><span class="mdot">&middot;</span><a href="https://www.cnbc.com/2026/09/04/jobs-report-august-2026.html" target="_blank" rel="noopener">Aug jobs report &#8599;</a></div>
+            <div class="dispatch-field"><span class="flabel">Summary</span><p>A fifth consecutive hold masks growing hawkish dissent: three officials favored a hike in July, and August's blowout payrolls report (+162,000 vs. ~53,000 expected) reignited September hike odds to roughly 58%.</p></div>
+            <div class="dispatch-field"><span class="flabel">Why it matters</span><p>Rate-sensitive equities &mdash; growth and long-duration tech &mdash; are most exposed to a repricing; front-end Treasury yields likely stay elevated into the Sep 16&ndash;17 FOMC.</p></div>
+            <details>
+              <summary><span class="chev">&#9656;</span>Interpretation</summary>
+              <div class="interp-body"><p>&ldquo;Clients keep asking when rates are coming down. The honest answer right now is: probably not next. Core PCE is still running at 3.3%, hotter than the 2.5% core CPI print, and the labor market just surprised to the upside. We're managing for a Fed that may need one more hike, not one that's about to cut.&rdquo;</p></div>
+            </details>
+          </div>
         </article>
-        <article class="item-card">
-          <h3>AI Capex Conviction Meets a Monetization Clock</h3>
-          <div class="item-row"><span class="item-label">Key takeaway</span><p>Hyperscalers are guiding to roughly $690&ndash;800B of combined 2026 capital spending, and investors are increasingly asking how fast that spend converts into operating margin rather than just topline growth.</p></div>
-          <div class="item-row"><span class="item-label">Market / sector impact</span><p>Mega-cap tech remains the market's single largest concentration risk; a margin-trajectory miss from any hyperscaler could trigger an outsized index-level move.</p></div>
-          <div class="talking-point"><span class="item-label">Client talking point</span><p>&ldquo;The AI story hasn't broken &mdash; it's matured. We're no longer debating whether AI is real; we're asking which companies are converting capex into cash flow. That makes this a stock-picker's market inside a mega-cap-weighted index.&rdquo;</p></div>
+        <article class="dispatch-card">
+          <span class="dispatch-rank mono tnum">02</span>
+          <div class="dispatch-body">
+            <span class="dispatch-tag">US Equities &amp; Economy</span>
+            <h3>AI Capex Conviction Meets a Monetization Clock</h3>
+            <div class="dispatch-meta"><span>Desk synthesis</span><span class="mdot">&middot;</span><span>Q2 2026 earnings cycle</span></div>
+            <div class="dispatch-field"><span class="flabel">Summary</span><p>Hyperscalers are guiding to roughly $690&ndash;800B of combined 2026 capital spending, and investors are increasingly asking how fast that spend converts into operating margin rather than just topline growth.</p></div>
+            <div class="dispatch-field"><span class="flabel">Why it matters</span><p>Mega-cap tech remains the market's single largest concentration risk; a margin-trajectory miss from any hyperscaler could trigger an outsized index-level move.</p></div>
+            <details>
+              <summary><span class="chev">&#9656;</span>Interpretation</summary>
+              <div class="interp-body"><p>&ldquo;The AI story hasn't broken &mdash; it's matured. We're no longer debating whether AI is real; we're asking which companies are converting capex into cash flow. That makes this a stock-picker's market inside a mega-cap-weighted index.&rdquo;</p></div>
+            </details>
+          </div>
         </article>
       </div>
     </div>
 
     <!-- Region 2 -->
     <div class="region-section">
-      <div class="region-head"><span class="region-num">02</span><h2>European Union &amp; UK</h2><span class="region-note">ECB &middot; BoE &middot; fiscal risk</span></div>
-      <div class="item-grid">
-        <article class="item-card">
-          <h3>ECB Signals More Hikes Are Coming, Not Fewer</h3>
-          <div class="item-row"><span class="item-label">Key takeaway</span><p>After a June hike to 2.25&ndash;2.40% and a July pause, ECB minutes explicitly warned markets not to read the pause as the end of tightening; a further move toward 2.50&ndash;2.65% is priced for the September 10 meeting.</p></div>
-          <div class="item-row"><span class="item-label">Market / sector impact</span><p>Eurozone credit and rate-sensitive equities face headwinds even as flash PMI data (52.8 manufacturing, ~52.0 composite) shows the real economy holding up better than the hiking cycle implies.</p></div>
-          <div class="talking-point"><span class="item-label">Client talking point</span><p>&ldquo;This isn't the ECB responding to recession risk &mdash; it's responding to energy-driven inflation against a resilient growth backdrop. That combination argues for staying selective in European duration rather than adding broadly.&rdquo;</p></div>
+      <div class="region-head"><span class="region-idx">02</span><h2>European Union &amp; UK</h2><span class="region-note">ECB &middot; BoE &middot; fiscal risk</span></div>
+      <div class="dispatch-list">
+        <article class="dispatch-card">
+          <span class="dispatch-rank mono tnum">03</span>
+          <div class="dispatch-body">
+            <span class="dispatch-tag">European Union &amp; UK</span>
+            <h3>ECB Signals More Hikes Are Coming, Not Fewer</h3>
+            <div class="dispatch-meta"><span>CNBC</span><span class="mdot">&middot;</span><span>Jul 23, 2026</span><span class="mdot">&middot;</span><a href="https://www.cnbc.com/2026/07/23/interest-rate-hike-iran-european-central-bank.html" target="_blank" rel="noopener">ECB policy note &#8599;</a></div>
+            <div class="dispatch-field"><span class="flabel">Summary</span><p>After a June hike to 2.25&ndash;2.40% and a July pause, ECB minutes explicitly warned markets not to read the pause as the end of tightening; a further move toward 2.50&ndash;2.65% is priced for the September 10 meeting.</p></div>
+            <div class="dispatch-field"><span class="flabel">Why it matters</span><p>Eurozone credit and rate-sensitive equities face headwinds even as flash PMI data (52.8 manufacturing, ~52.0 composite) shows the real economy holding up better than the hiking cycle implies.</p></div>
+            <details>
+              <summary><span class="chev">&#9656;</span>Interpretation</summary>
+              <div class="interp-body"><p>&ldquo;This isn't the ECB responding to recession risk &mdash; it's responding to energy-driven inflation against a resilient growth backdrop. That combination argues for staying selective in European duration rather than adding broadly.&rdquo;</p></div>
+            </details>
+          </div>
         </article>
-        <article class="item-card">
-          <h3>UK Gilts Near a 19-Year High Ahead of the Autumn Budget</h3>
-          <div class="item-row"><span class="item-label">Key takeaway</span><p>The 10-year gilt touched 5.29% before easing to roughly 5.16%, while the BoE held its Bank Rate at 3.75% on a split 6&ndash;3 vote with inflation running at 2.9%.</p></div>
-          <div class="item-row"><span class="item-label">Market / sector impact</span><p>The Autumn Budget is now a live volatility event for UK rates; further fiscal slippage could retest the highs and spill into GBP.</p></div>
-          <div class="talking-point"><span class="item-label">Client talking point</span><p>&ldquo;If a client holds UK gilts, this is a duration conversation, not a credit-quality one. The risk here is a fiscal event, and we're positioning shorter into the Budget date rather than guessing the outcome.&rdquo;</p></div>
+        <article class="dispatch-card">
+          <span class="dispatch-rank mono tnum">04</span>
+          <div class="dispatch-body">
+            <span class="dispatch-tag">European Union &amp; UK</span>
+            <h3>UK Gilts Near a 19-Year High Ahead of the Autumn Budget</h3>
+            <div class="dispatch-meta"><span>Trading Economics</span><span class="mdot">&middot;</span><span>Sep 3, 2026</span><span class="mdot">&middot;</span><a href="https://tradingeconomics.com/united-kingdom/government-bond-yield" target="_blank" rel="noopener">UK gilt yield &#8599;</a></div>
+            <div class="dispatch-field"><span class="flabel">Summary</span><p>The 10-year gilt touched 5.29% before easing to roughly 5.16%, while the BoE held its Bank Rate at 3.75% on a split 6&ndash;3 vote with inflation running at 2.9%.</p></div>
+            <div class="dispatch-field"><span class="flabel">Why it matters</span><p>The Autumn Budget is now a live volatility event for UK rates; further fiscal slippage could retest the highs and spill into GBP.</p></div>
+            <details>
+              <summary><span class="chev">&#9656;</span>Interpretation</summary>
+              <div class="interp-body"><p>&ldquo;If a client holds UK gilts, this is a duration conversation, not a credit-quality one. The risk here is a fiscal event, and we're positioning shorter into the Budget date rather than guessing the outcome.&rdquo;</p></div>
+            </details>
+          </div>
         </article>
       </div>
     </div>
 
     <!-- Region 3 -->
     <div class="region-section">
-      <div class="region-head"><span class="region-num">03</span><h2>Asia-Pacific &amp; Japan</h2><span class="region-note">BoJ normalization &middot; yen &middot; India</span></div>
-      <div class="item-grid">
-        <article class="item-card">
-          <h3>Japan's Bond Market Crosses a Line Not Seen Since 1996</h3>
-          <div class="item-row"><span class="item-label">Key takeaway</span><p>The 10-year JGB yield touched 3% on September 1 as BoJ normalization (now at 1.00%, the highest since 1995) collides with investor concern over Japan's fiscal sustainability.</p></div>
-          <div class="item-row"><span class="item-label">Market / sector impact</span><p>A stronger yen (USD/JPY ~156) and rising domestic yields are pressuring Japanese exporters and tech names even as the Nikkei remains up ~52% year over year.</p></div>
-          <div class="talking-point"><span class="item-label">Client talking point</span><p>&ldquo;This is a genuine regime change for a market clients have long treated as cheap funding. If anyone in the portfolio is running a yen-funded carry trade, this is the conversation to have now &mdash; not after the next leg of yen strength.&rdquo;</p></div>
+      <div class="region-head"><span class="region-idx">03</span><h2>Asia-Pacific &amp; Japan</h2><span class="region-note">BoJ normalization &middot; yen &middot; India</span></div>
+      <div class="dispatch-list">
+        <article class="dispatch-card">
+          <span class="dispatch-rank mono tnum">05</span>
+          <div class="dispatch-body">
+            <span class="dispatch-tag">Asia-Pacific &amp; Japan</span>
+            <h3>Japan's Bond Market Crosses a Line Not Seen Since 1996</h3>
+            <div class="dispatch-meta"><span>Bloomberg</span><span class="mdot">&middot;</span><span>Sep 1, 2026</span><span class="mdot">&middot;</span><a href="https://www.bloomberg.com/news/articles/2026-09-01/japan-s-10-year-bond-yield-hits-3-for-first-time-since-1996-mti4e8ui" target="_blank" rel="noopener">JGB yield report &#8599;</a></div>
+            <div class="dispatch-field"><span class="flabel">Summary</span><p>The 10-year JGB yield touched 3% on September 1 as BoJ normalization (now at 1.00%, the highest since 1995) collides with investor concern over Japan's fiscal sustainability.</p></div>
+            <div class="dispatch-field"><span class="flabel">Why it matters</span><p>A stronger yen (USD/JPY ~156) and rising domestic yields are pressuring Japanese exporters and tech names even as the Nikkei remains up ~52% year over year.</p></div>
+            <details>
+              <summary><span class="chev">&#9656;</span>Interpretation</summary>
+              <div class="interp-body"><p>&ldquo;This is a genuine regime change for a market clients have long treated as cheap funding. If anyone in the portfolio is running a yen-funded carry trade, this is the conversation to have now &mdash; not after the next leg of yen strength.&rdquo;</p></div>
+            </details>
+          </div>
         </article>
-        <article class="item-card">
-          <h3>India Underperforms for a Fourth Straight Week</h3>
-          <div class="item-row"><span class="item-label">Key takeaway</span><p>The Sensex (~76,515) and Nifty (~23,897) have declined for four consecutive weeks, pressured by elevated Brent crude and new closing-auction market-structure volatility.</p></div>
-          <div class="item-row"><span class="item-label">Market / sector impact</span><p>India's structural growth story remains intact, but near-term returns are being driven by external oil sensitivity and mechanics rather than domestic fundamentals.</p></div>
-          <div class="talking-point"><span class="item-label">Client talking point</span><p>&ldquo;We wouldn't read this pullback as a change in the India thesis. It's an oil-price and market-mechanics story layered on top of structurally sound growth &mdash; entry discipline matters more than timing calls here.&rdquo;</p></div>
+        <article class="dispatch-card">
+          <span class="dispatch-rank mono tnum">06</span>
+          <div class="dispatch-body">
+            <span class="dispatch-tag">Asia-Pacific &amp; Japan</span>
+            <h3>India Underperforms for a Fourth Straight Week</h3>
+            <div class="dispatch-meta"><span>Trading Economics</span><span class="mdot">&middot;</span><span>Sep 2026</span><span class="mdot">&middot;</span><a href="https://tradingeconomics.com/india/stock-market" target="_blank" rel="noopener">India equities &#8599;</a></div>
+            <div class="dispatch-field"><span class="flabel">Summary</span><p>The Sensex (~76,515) and Nifty (~23,897) have declined for four consecutive weeks, pressured by elevated Brent crude and new closing-auction market-structure volatility.</p></div>
+            <div class="dispatch-field"><span class="flabel">Why it matters</span><p>India's structural growth story remains intact, but near-term returns are being driven by external oil sensitivity and mechanics rather than domestic fundamentals.</p></div>
+            <details>
+              <summary><span class="chev">&#9656;</span>Interpretation</summary>
+              <div class="interp-body"><p>&ldquo;We wouldn't read this pullback as a change in the India thesis. It's an oil-price and market-mechanics story layered on top of structurally sound growth &mdash; entry discipline matters more than timing calls here.&rdquo;</p></div>
+            </details>
+          </div>
         </article>
       </div>
     </div>
 
     <!-- Region 4 -->
     <div class="region-section">
-      <div class="region-head"><span class="region-num">04</span><h2>China &amp; Emerging Markets</h2><span class="region-note">Growth deceleration &middot; PMI &middot; tariffs</span></div>
-      <div class="item-grid">
-        <article class="item-card">
-          <h3>China's Growth Slows to 4.3% &mdash; But PMI May Be Turning</h3>
-          <div class="item-row"><span class="item-label">Key takeaway</span><p>Q2 GDP growth decelerated to 4.3% y/y, the weakest pace in roughly four years, while the private-survey August manufacturing PMI jumped to 51.5, a multi-year high &mdash; a split worth flagging on its own.</p></div>
-          <div class="item-row"><span class="item-label">Market / sector impact</span><p>The unresolved property-sector downturn remains a structural drag on domestic demand and a source of banking-sector risk, even as export and AI-adjacent manufacturing show tentative strength.</p></div>
-          <div class="talking-point"><span class="item-label">Client talking point</span><p>&ldquo;China is giving us two stories in the same month: an economy still working through a property hangover, and a manufacturing survey printing its best number in years. We're not calling a bottom yet, but we are watching the PMI trend closely.&rdquo;</p></div>
+      <div class="region-head"><span class="region-idx">04</span><h2>China &amp; Emerging Markets</h2><span class="region-note">Growth deceleration &middot; PMI &middot; tariffs</span></div>
+      <div class="dispatch-list">
+        <article class="dispatch-card">
+          <span class="dispatch-rank mono tnum">07</span>
+          <div class="dispatch-body">
+            <span class="dispatch-tag">China &amp; Emerging Markets</span>
+            <h3>China's Growth Slows to 4.3% &mdash; But PMI May Be Turning</h3>
+            <div class="dispatch-meta"><span>Trading Economics / IndexBox</span><span class="mdot">&middot;</span><span>Aug&ndash;Sep 2026</span><span class="mdot">&middot;</span><a href="https://tradingeconomics.com/china/gdp-growth-annual" target="_blank" rel="noopener">China GDP &#8599;</a></div>
+            <div class="dispatch-field"><span class="flabel">Summary</span><p>Q2 GDP growth decelerated to 4.3% y/y, the weakest pace in roughly four years, while the private-survey August manufacturing PMI jumped to 51.5, a multi-year high &mdash; a split worth flagging on its own.</p></div>
+            <div class="dispatch-field"><span class="flabel">Why it matters</span><p>The unresolved property-sector downturn remains a structural drag on domestic demand and a source of banking-sector risk, even as export and AI-adjacent manufacturing show tentative strength.</p></div>
+            <details>
+              <summary><span class="chev">&#9656;</span>Interpretation</summary>
+              <div class="interp-body"><p>&ldquo;China is giving us two stories in the same month: an economy still working through a property hangover, and a manufacturing survey printing its best number in years. We're not calling a bottom yet, but we are watching the PMI trend closely.&rdquo;</p></div>
+            </details>
+          </div>
         </article>
-        <article class="item-card">
-          <h3>Yuan Stability Masks a Broader EM Tariff Repricing</h3>
-          <div class="item-row"><span class="item-label">Key takeaway</span><p>The yuan has held steady near 6.72/USD, but broader emerging-market currencies remain under pressure from ongoing US tariff actions layered on top of the energy shock from the Iran conflict.</p></div>
-          <div class="item-row"><span class="item-label">Market / sector impact</span><p>EM oil importers face a double headwind of tariffs plus energy costs, while EM oil exporters are relative beneficiaries of elevated Brent prices.</p></div>
-          <div class="talking-point"><span class="item-label">Client talking point</span><p>&ldquo;Not all emerging markets face the same risks right now. We're differentiating oil importers from exporters within EM allocations rather than treating the asset class as one trade.&rdquo;</p></div>
+        <article class="dispatch-card">
+          <span class="dispatch-rank mono tnum">08</span>
+          <div class="dispatch-body">
+            <span class="dispatch-tag">China &amp; Emerging Markets</span>
+            <h3>Yuan Stability Masks a Broader EM Tariff Repricing</h3>
+            <div class="dispatch-meta"><span>Trading Economics</span><span class="mdot">&middot;</span><span>Sep 2026</span><span class="mdot">&middot;</span><a href="https://tradingeconomics.com/china/currency" target="_blank" rel="noopener">USD/CNY &#8599;</a></div>
+            <div class="dispatch-field"><span class="flabel">Summary</span><p>The yuan has held steady near 6.72/USD, but broader emerging-market currencies remain under pressure from ongoing US tariff actions layered on top of the energy shock from the Iran conflict.</p></div>
+            <div class="dispatch-field"><span class="flabel">Why it matters</span><p>EM oil importers face a double headwind of tariffs plus energy costs, while EM oil exporters are relative beneficiaries of elevated Brent prices.</p></div>
+            <details>
+              <summary><span class="chev">&#9656;</span>Interpretation</summary>
+              <div class="interp-body"><p>&ldquo;Not all emerging markets face the same risks right now. We're differentiating oil importers from exporters within EM allocations rather than treating the asset class as one trade.&rdquo;</p></div>
+            </details>
+          </div>
         </article>
       </div>
     </div>
 
     <!-- Region 5 -->
     <div class="region-section">
-      <div class="region-head"><span class="region-num">05</span><h2>Global Commodities, FX &amp; Fixed Income</h2><span class="region-note">Oil &middot; gold &middot; copper &middot; dollar</span></div>
-      <div class="item-grid">
-        <article class="item-card">
-          <h3>Oil Spikes on US Strikes, Then Recedes on a &ldquo;Contained Campaign&rdquo; Signal</h3>
-          <div class="item-row"><span class="item-label">Key takeaway</span><p>Brent touched near $98/bbl after September 1 US strikes on Iranian IRGC targets before easing to ~$96.79 as messaging pointed to a contained response; OPEC+ has also begun unwinding output cuts.</p></div>
-          <div class="item-row"><span class="item-label">Market / sector impact</span><p>Energy remains the single largest source of cross-asset volatility, feeding directly into inflation expectations and central-bank hawkishness across the US, EU, UK, and Japan.</p></div>
-          <div class="talking-point"><span class="item-label">Client talking point</span><p>&ldquo;The war premium in oil hasn't gone away &mdash; it's being repriced day to day based on how contained the conflict looks. That's not a reason to chase energy, but it is a reason to keep an inflation hedge in the portfolio.&rdquo;</p></div>
+      <div class="region-head"><span class="region-idx">05</span><h2>Global Commodities, FX &amp; Fixed Income</h2><span class="region-note">Oil &middot; gold &middot; copper &middot; dollar</span></div>
+      <div class="dispatch-list">
+        <article class="dispatch-card">
+          <span class="dispatch-rank mono tnum">09</span>
+          <div class="dispatch-body">
+            <span class="dispatch-tag">Commodities, FX &amp; Fixed Income</span>
+            <h3>Oil Spikes on US Strikes, Then Recedes on a &ldquo;Contained Campaign&rdquo; Signal</h3>
+            <div class="dispatch-meta"><span>Vantage Markets</span><span class="mdot">&middot;</span><span>Sep 3, 2026</span><span class="mdot">&middot;</span><a href="https://www.vantagemarkets.com/market-analysis/brent-wti-crude-oil-price-september-3-2026/" target="_blank" rel="noopener">Brent/WTI note &#8599;</a></div>
+            <div class="dispatch-field"><span class="flabel">Summary</span><p>Brent touched near $98/bbl after September 1 US strikes on Iranian IRGC targets before easing to ~$96.79 as messaging pointed to a contained response; OPEC+ has also begun unwinding output cuts.</p></div>
+            <div class="dispatch-field"><span class="flabel">Why it matters</span><p>Energy remains the single largest source of cross-asset volatility, feeding directly into inflation expectations and central-bank hawkishness across the US, EU, UK, and Japan.</p></div>
+            <details>
+              <summary><span class="chev">&#9656;</span>Interpretation</summary>
+              <div class="interp-body"><p>&ldquo;The war premium in oil hasn't gone away &mdash; it's being repriced day to day based on how contained the conflict looks. That's not a reason to chase energy, but it is a reason to keep an inflation hedge in the portfolio.&rdquo;</p></div>
+            </details>
+          </div>
         </article>
-        <article class="item-card">
-          <h3>Gold Pulls Back as Blowout Jobs Data Revives Hike Bets</h3>
-          <div class="item-row"><span class="item-label">Key takeaway</span><p>Gold, trading in the $4,400&ndash;4,500/oz range and up over 20% year over year, dipped after August payrolls surprised sharply to the upside, reviving September rate-hike odds.</p></div>
-          <div class="item-row"><span class="item-label">Market / sector impact</span><p>Gold's safe-haven bid is now competing directly with a stronger-for-longer rate outlook &mdash; expect that tug-of-war to continue through the FOMC.</p></div>
-          <div class="talking-point"><span class="item-label">Client talking point</span><p>&ldquo;Clients see gold near record levels and ask if they've missed it. Our answer: gold is being pulled in two directions &mdash; geopolitical risk on one side, rate expectations on the other. We hold it as a diversifier, not a directional bet.&rdquo;</p></div>
+        <article class="dispatch-card">
+          <span class="dispatch-rank mono tnum">10</span>
+          <div class="dispatch-body">
+            <span class="dispatch-tag">Commodities, FX &amp; Fixed Income</span>
+            <h3>Gold Pulls Back as Blowout Jobs Data Revives Hike Bets</h3>
+            <div class="dispatch-meta"><span>Fortune</span><span class="mdot">&middot;</span><span>Sep 3, 2026</span><span class="mdot">&middot;</span><a href="https://fortune.com/article/current-price-of-gold-09-03-2026/" target="_blank" rel="noopener">Gold price note &#8599;</a></div>
+            <div class="dispatch-field"><span class="flabel">Summary</span><p>Gold, trading in the $4,400&ndash;4,500/oz range and up over 20% year over year, dipped after August payrolls surprised sharply to the upside, reviving September rate-hike odds.</p></div>
+            <div class="dispatch-field"><span class="flabel">Why it matters</span><p>Gold's safe-haven bid is now competing directly with a stronger-for-longer rate outlook &mdash; expect that tug-of-war to continue through the FOMC.</p></div>
+            <details>
+              <summary><span class="chev">&#9656;</span>Interpretation</summary>
+              <div class="interp-body"><p>&ldquo;Clients see gold near record levels and ask if they've missed it. Our answer: gold is being pulled in two directions &mdash; geopolitical risk on one side, rate expectations on the other. We hold it as a diversifier, not a directional bet.&rdquo;</p></div>
+            </details>
+          </div>
         </article>
-        <article class="item-card">
-          <h3>Copper's Steep Backwardation Signals Physical Tightness</h3>
-          <div class="item-row"><span class="item-label">Key takeaway</span><p>Copper trades near $6.56/lb, up 47% year over year, with the futures curve in steep backwardation as supply disruptions in Chile and Congo meet tariff-driven US stockpiling.</p></div>
-          <div class="item-row"><span class="item-label">Market / sector impact</span><p>Backwardation (spot pricier than futures) points to genuine near-term physical scarcity rather than pure speculative positioning &mdash; a distinction worth making explicitly to clients.</p></div>
-          <div class="talking-point"><span class="item-label">Client talking point</span><p>&ldquo;Good teaching moment: when the front of the curve costs more than future delivery, the market is telling you buyers need the metal now. That's a different signal than a headline price move alone.&rdquo;</p></div>
+        <article class="dispatch-card">
+          <span class="dispatch-rank mono tnum">11</span>
+          <div class="dispatch-body">
+            <span class="dispatch-tag">Commodities, FX &amp; Fixed Income</span>
+            <h3>Copper's Steep Backwardation Signals Physical Tightness</h3>
+            <div class="dispatch-meta"><span>Trading Economics</span><span class="mdot">&middot;</span><span>Sep 2026</span><span class="mdot">&middot;</span><a href="https://tradingeconomics.com/commodity/copper" target="_blank" rel="noopener">Copper price &#8599;</a></div>
+            <div class="dispatch-field"><span class="flabel">Summary</span><p>Copper trades near $6.56/lb, up 47% year over year, with the futures curve in steep backwardation as supply disruptions in Chile and Congo meet tariff-driven US stockpiling.</p></div>
+            <div class="dispatch-field"><span class="flabel">Why it matters</span><p>Backwardation (spot pricier than futures) points to genuine near-term physical scarcity rather than pure speculative positioning &mdash; a distinction worth making explicitly to clients.</p></div>
+            <details>
+              <summary><span class="chev">&#9656;</span>Interpretation</summary>
+              <div class="interp-body"><p>&ldquo;Good teaching moment: when the front of the curve costs more than future delivery, the market is telling you buyers need the metal now. That's a different signal than a headline price move alone.&rdquo;</p></div>
+            </details>
+          </div>
         </article>
       </div>
     </div>
@@ -582,80 +628,100 @@
   <section id="tab-deep" class="tab-panel" role="tabpanel" aria-labelledby="tabbtn-deep" hidden>
 
     <div class="deep-section">
-      <div class="deep-head"><span class="region-num">§1</span><h2>Macro Mechanics &amp; Transmission Channels</h2></div>
+      <div class="deep-head"><span class="region-idx">&sect;1</span><h2>Macro Mechanics &amp; Transmission Channels</h2></div>
       <p class="deep-sub">How policy, inflation, and currency moves actually travel through markets &mdash; not just what moved.</p>
       <div class="mechanic-grid">
         <article class="mechanic-card">
-          <h3><span class="tag">Rates</span>Yield-Curve Dynamics &amp; Term Premium</h3>
-          <p>Long-end yields move for two separable reasons: the market's expectation of the future policy path, and the <em>term premium</em> &mdash; the extra compensation investors demand for holding duration through an uncertain path, which rises independently when sovereign issuance is heavy or fiscal credibility is in question.</p>
-          <p class="now"><b>Right now:</b> Bund (~3.35%), gilt (~5.16%) and JGB (3.00%) yields are all elevated even where central banks are only debating a hold-versus-hike, not accelerating cuts &mdash; a signal that term premium, not just rate-path expectations, is doing a lot of the work. A rising term premium compresses valuation multiples, hitting long-duration growth equities hardest.</p>
+          <span class="mechanic-rank mono tnum">01</span>
+          <div class="mechanic-body">
+            <span class="dispatch-tag">Rates</span>
+            <h3>Yield-Curve Dynamics &amp; Term Premium</h3>
+            <p>Long-end yields move for two separable reasons: the market's expectation of the future policy path, and the <em>term premium</em> &mdash; the extra compensation investors demand for holding duration through an uncertain path, which rises independently when sovereign issuance is heavy or fiscal credibility is in question.</p>
+            <p class="now"><b>Right now:</b> Bund (~3.35%), gilt (~5.16%) and JGB (3.00%) yields are all elevated even where central banks are only debating a hold-versus-hike, not accelerating cuts &mdash; a signal that term premium, not just rate-path expectations, is doing a lot of the work.</p>
+          </div>
         </article>
         <article class="mechanic-card">
-          <h3><span class="tag">Inflation</span>PPI-to-CPI Passthrough &amp; the CPI/PCE Gap</h3>
-          <p>Producer-price increases in energy, freight, and industrial inputs typically pass through to core consumer goods prices with a 2&ndash;3 month lag, as retailers reprice existing inventory before restocking at higher cost. CPI and PCE can also diverge because PCE uses a broader, chain-weighted basket (including employer-sponsored health insurance) that reweights toward substitutes faster than CPI's fixed-basket method.</p>
-          <p class="now"><b>Right now:</b> July core CPI printed 2.5% y/y while core PCE &mdash; the Fed's preferred gauge &mdash; ran hotter at 3.3% y/y. That composition gap is wider than typical, and it's the reason the Fed can sound hawkish even when the headline CPI print looks tame.</p>
+          <span class="mechanic-rank mono tnum">02</span>
+          <div class="mechanic-body">
+            <span class="dispatch-tag">Inflation</span>
+            <h3>PPI-to-CPI Passthrough &amp; the CPI/PCE Gap</h3>
+            <p>Producer-price increases in energy, freight, and industrial inputs typically pass through to core consumer goods prices with a 2&ndash;3 month lag. CPI and PCE can also diverge because PCE uses a broader, chain-weighted basket that reweights toward substitutes faster than CPI's fixed-basket method.</p>
+            <p class="now"><b>Right now:</b> July core CPI printed 2.5% y/y while core PCE &mdash; the Fed's preferred gauge &mdash; ran hotter at 3.3% y/y, which is why the Fed can sound hawkish even when the headline CPI print looks tame.</p>
+          </div>
         </article>
         <article class="mechanic-card">
-          <h3><span class="tag">FX</span>Sovereign Balances &amp; Currency Resilience</h3>
-          <p>A country running a current-account surplus and a large net foreign-asset position (like Japan) has structural currency support that shows up especially when global risk aversion rises. A country running a persistent current-account deficit needs continuous foreign capital inflows to fund it, which makes its currency and its bond yields more sensitive to a confidence shock.</p>
-          <p class="now"><b>Right now:</b> USD/JPY has rallied toward ~156 on a narrowing rate differential and intervention speculation, while the UK's gilt-market wobble ahead of the Autumn Budget is a textbook deficit-country confidence test playing out in GBP and gilt yields simultaneously.</p>
+          <span class="mechanic-rank mono tnum">03</span>
+          <div class="mechanic-body">
+            <span class="dispatch-tag">FX</span>
+            <h3>Sovereign Balances &amp; Currency Resilience</h3>
+            <p>A current-account surplus nation with a large net foreign-asset position (like Japan) has structural currency support. A persistent deficit nation needs continuous foreign capital inflows, which makes its currency and bond yields more sensitive to a confidence shock.</p>
+            <p class="now"><b>Right now:</b> USD/JPY has rallied toward ~156 on a narrowing rate differential and intervention speculation, while the UK's gilt-market wobble ahead of the Autumn Budget is a textbook deficit-country confidence test.</p>
+          </div>
         </article>
       </div>
     </div>
 
     <div class="deep-section">
-      <div class="deep-head"><span class="region-num">§2</span><h2>Micro Fundamentals &amp; Equity Mechanics</h2></div>
+      <div class="deep-head"><span class="region-idx">&sect;2</span><h2>Micro Fundamentals &amp; Equity Mechanics</h2></div>
       <p class="deep-sub">Reading through headline earnings and commodity prices to the underlying physical and accounting mechanics.</p>
       <div class="mechanic-grid">
         <article class="mechanic-card">
-          <h3><span class="tag">Equity</span>Earnings Quality &amp; CapEx Conversion</h3>
-          <p>Capital spent today doesn't hit the income statement as an expense immediately &mdash; it's capitalized and depreciated over years. The analyst discipline is tracking the capex-to-depreciation ratio and free-cash-flow conversion over several quarters, not just the current quarter's revenue growth, because a revenue beat funded by spend that hasn't yet depreciated can flatter today's numbers.</p>
-          <p class="now"><b>Right now:</b> with hyperscaler 2026 capex guided to roughly $690&ndash;800B, the real test of the AI investment thesis is operating-margin trajectory over the next 4&ndash;8 quarters as that spend begins to depreciate &mdash; not this quarter's topline growth.</p>
+          <span class="mechanic-rank mono tnum">04</span>
+          <div class="mechanic-body">
+            <span class="dispatch-tag">Equity</span>
+            <h3>Earnings Quality &amp; CapEx Conversion</h3>
+            <p>Capital spent today doesn't hit the income statement as an expense immediately &mdash; it's capitalized and depreciated over years. The analyst discipline is tracking the capex-to-depreciation ratio and free-cash-flow conversion over several quarters, not just current-quarter revenue growth.</p>
+            <p class="now"><b>Right now:</b> with hyperscaler 2026 capex guided to roughly $690&ndash;800B, the real test of the AI investment thesis is operating-margin trajectory over the next 4&ndash;8 quarters &mdash; not this quarter's topline growth.</p>
+          </div>
         </article>
         <article class="mechanic-card">
-          <h3><span class="tag">Commodities</span>Backwardation vs. Contango</h3>
-          <p><em>Backwardation</em> &mdash; when the spot or near-month price sits above forward-month prices &mdash; signals immediate physical scarcity: buyers are paying a premium for metal or oil delivered now because visible warehouse inventories (LME, COMEX) are drawing down. <em>Contango</em>, the opposite shape, signals ample supply or high storage costs, which incentivizes buyers to defer purchases.</p>
-          <p class="now"><b>Right now:</b> copper's steep backwardation reflects a genuine mix of supply loss (Chile output down 9.4% y/y, a Congo export restriction) and tariff-driven strategic stockpiling in US warehouses &mdash; meaning part of the signal is positioning, not pure end-demand strength. Analysts should separate the two before extrapolating the price into a demand forecast.</p>
+          <span class="mechanic-rank mono tnum">05</span>
+          <div class="mechanic-body">
+            <span class="dispatch-tag">Commodities</span>
+            <h3>Backwardation vs. Contango</h3>
+            <p><em>Backwardation</em> &mdash; spot or near-month price above forward months &mdash; signals immediate physical scarcity: buyers pay a premium for metal or oil delivered now as visible warehouse inventories draw down. <em>Contango</em> signals ample supply or high storage costs, which incentivizes buyers to defer purchases.</p>
+            <p class="now"><b>Right now:</b> copper's steep backwardation reflects a genuine mix of supply loss (Chile output down 9.4% y/y, a Congo export restriction) and tariff-driven strategic stockpiling in US warehouses &mdash; part signal, part positioning.</p>
+          </div>
         </article>
       </div>
     </div>
 
     <div class="deep-section">
-      <div class="deep-head"><span class="region-num">§3</span><h2>Analyst Learning Notes</h2></div>
+      <div class="deep-head"><span class="region-idx">&sect;3</span><h2>Analyst Learning Notes</h2></div>
       <p class="deep-sub">Standalone mechanics worth internalizing &mdash; generalizable beyond this month's headlines.</p>
       <div class="note-grid">
         <article class="learning-note">
           <div class="note-kicker">&#9998; Learning Note</div>
           <h3>Reading a Futures Curve Shape</h3>
-          <p>Always ask two questions before trading a curve shape: is inventory actually falling (check LME/COMEX warehouse data), and is demand for immediate delivery genuinely rising, or is a large buyer front-loading purchases for reasons unrelated to consumption (tariff avoidance, strategic reserves)? Backwardation from the first cause is a demand signal; from the second, it's a positioning artifact.</p>
+          <p>Always ask two questions before trading a curve shape: is inventory actually falling (check LME/COMEX warehouse data), and is demand for immediate delivery genuinely rising, or is a large buyer front-loading purchases for reasons unrelated to consumption? Backwardation from the first cause is a demand signal; from the second, it's a positioning artifact.</p>
         </article>
         <article class="learning-note">
           <div class="note-kicker">&#9998; Learning Note</div>
           <h3>Term Premium Is Not the Same as Rate Expectations</h3>
-          <p>A 10-year yield can rise even while a central bank holds rates steady, if investors demand more compensation for duration risk &mdash; from heavier debt issuance, fiscal concerns, or inflation-persistence fears. Don't read every yield move as a forecast of the next policy decision; decompose it first.</p>
+          <p>A 10-year yield can rise even while a central bank holds rates steady, if investors demand more compensation for duration risk &mdash; from heavier debt issuance, fiscal concerns, or inflation-persistence fears. Decompose a yield move before reading it as a policy forecast.</p>
         </article>
         <article class="learning-note">
           <div class="note-kicker">&#9998; Learning Note</div>
           <h3>Why CPI and PCE Can Diverge</h3>
-          <p>CPI uses a fixed consumer-spending basket updated infrequently; PCE is broader, chain-weighted, and reweights toward cheaper substitutes faster. A gap this wide (2.5% core CPI vs. 3.3% core PCE) usually reflects category-weight differences &mdash; shelter and imputed healthcare costs typically matter most &mdash; and it explains why the Fed can sound more hawkish than the CPI headline suggests.</p>
+          <p>CPI uses a fixed consumer-spending basket updated infrequently; PCE is broader, chain-weighted, and reweights toward cheaper substitutes faster. A gap this wide usually reflects category-weight differences &mdash; shelter and imputed healthcare costs typically matter most.</p>
         </article>
         <article class="learning-note">
           <div class="note-kicker">&#9998; Learning Note</div>
           <h3>Current Account Balances Predict Currency Fragility</h3>
-          <p>A current-account surplus nation (Japan) funds itself; a deficit nation (the UK) borrows continuously from abroad to do so. That structural difference is why a UK fiscal event moves gilts and GBP together, while a similar shock in a surplus economy is more easily absorbed.</p>
+          <p>A current-account surplus nation (Japan) funds itself; a deficit nation (the UK) borrows continuously from abroad to do so. That's why a UK fiscal event moves gilts and GBP together, while a similar shock in a surplus economy is more easily absorbed.</p>
         </article>
         <article class="learning-note">
           <div class="note-kicker">&#9998; Learning Note</div>
           <h3>Capex Today, Depreciation Tomorrow</h3>
-          <p>A capex boom flatters revenue and sentiment immediately but only shows its true return once the depreciation schedule catches up, typically 2&ndash;4 years out. Track ROIC and free-cash-flow conversion trends now so a margin disappointment later isn't a surprise.</p>
+          <p>A capex boom flatters revenue and sentiment immediately but only shows its true return once the depreciation schedule catches up, typically 2&ndash;4 years out. Track ROIC and free-cash-flow conversion now so a margin disappointment later isn't a surprise.</p>
         </article>
       </div>
     </div>
 
     <div class="deep-section">
-      <div class="deep-head"><span class="region-num">§4</span><h2>Second-Order Risk Matrix</h2></div>
+      <div class="deep-head"><span class="region-idx">&sect;4</span><h2>Second-Order Risk Matrix</h2></div>
       <p class="deep-sub">Tail risks, fiscal dominance, and trade-compliance frictions worth pre-positioning the discussion around.</p>
-      <div class="risk-wrap">
+      <div class="table-panel">
         <div class="table-scroll">
           <table class="risk">
             <thead>
@@ -715,7 +781,7 @@
 
 <script>
 (function(){
-  var tabBtns = document.querySelectorAll('.tab-btn');
+  var tabBtns = document.querySelectorAll('.pill-tab');
   var panels = { client: document.getElementById('tab-client'), deep: document.getElementById('tab-deep') };
 
   tabBtns.forEach(function(btn){
@@ -736,7 +802,7 @@
   var clearBtn = document.getElementById('clearBtn');
   var countEl = document.getElementById('searchCount');
 
-  var filterables = Array.prototype.slice.call(document.querySelectorAll('.item-card, .mechanic-card, .learning-note'));
+  var filterables = Array.prototype.slice.call(document.querySelectorAll('.dispatch-card, .mechanic-card, .learning-note'));
   var matrixRows = Array.prototype.slice.call(document.querySelectorAll('table.matrix tbody tr, table.risk tbody tr'));
   var sections = Array.prototype.slice.call(document.querySelectorAll('.region-section, .deep-section'));
   var noResultsEls = { client: document.querySelector('#tab-client .no-results'), deep: document.querySelector('#tab-deep .no-results') };
@@ -759,10 +825,9 @@
       if (match) totalVisible++;
     });
 
-    // per-section empty state (only meaningful for card-grid sections, not the matrix/risk tables)
     sections.forEach(function(section){
-      var cards = section.querySelectorAll('.item-card, .mechanic-card, .learning-note');
-      if (cards.length === 0) return; // sections without cards (matrix table lives outside .region-section)
+      var cards = section.querySelectorAll('.dispatch-card, .mechanic-card, .learning-note');
+      if (cards.length === 0) return;
       var anyVisible = Array.prototype.some.call(cards, function(c){ return !c.hidden; });
       section.style.display = anyVisible ? '' : 'none';
     });
@@ -775,7 +840,7 @@
       return;
     }
 
-    var clientVisible = Array.prototype.some.call(document.querySelectorAll('#tab-client .item-card'), function(c){ return !c.hidden; })
+    var clientVisible = Array.prototype.some.call(document.querySelectorAll('#tab-client .dispatch-card'), function(c){ return !c.hidden; })
       || Array.prototype.some.call(document.querySelectorAll('#tab-client table.matrix tbody tr'), function(r){ return r.style.display !== 'none'; });
     var deepVisible = Array.prototype.some.call(document.querySelectorAll('#tab-deep .mechanic-card, #tab-deep .learning-note'), function(c){ return !c.hidden; })
       || Array.prototype.some.call(document.querySelectorAll('#tab-deep table.risk tbody tr'), function(r){ return r.style.display !== 'none'; });
